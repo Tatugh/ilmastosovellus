@@ -82,9 +82,10 @@ Test cases:
 Tulokset:
 -	Toimii (toivottavasti)
 
-6	PROJEKTIN HALLINTA
+## 6	PROJEKTIN HALLINTA
 Aikajana ja milestonet:
-- Viikko 1: Teknologiat valittu, henkilistö kirjoitettu dokumenttiin, dokumentoinnin väsääminen. Ensimmäinen commit gittiin
+- ***Viikko* 1**: Teknologiat valittu, henkilistö kirjoitettu dokumenttiin, dokumentoinnin väsääminen. Ensimmäinen commit gittiin
+- ***Viikko* 2**: API löydetty ja Martin lisätty projektiin.
 
 Riskien hallinta / Laatuvaatimukset:
 -	Kommukunikoidaan jos on ongelmia tai kun muutoksia tehdään 
