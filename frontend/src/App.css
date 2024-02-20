@@ -5,6 +5,41 @@
   text-align: center;
 }
 
+body {
+  background-image:url(assets/tuulis.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.content-container {
+  position: absolute;
+  width: 69%;
+  height: 100%;
+  transform: translate(-50%,-50%);
+  background-color: rgba(100,100,100,0.9);
+  padding:20px;
+  border-radius: 10px;
+  z-index: 1;
+  max-width: 80%;
+}
+
+.content {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.price-container {
+  background-color: rgba(256,0,0,0.8);
+  border-radius: 50%;
+  position: relative;
+  left: 50%;
+  width:100px;
+  height:100px;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
