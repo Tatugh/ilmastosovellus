@@ -67,7 +67,8 @@ Käyttöliittymä tulee sisältää seuraavat asiat:
 -	Anna käyttäjien vaihtaa eri sijaintien välillä.
 -	Käyttöliittymän tulee toimia eri laitteilla, (työpöytä, mobiili)
 
-API rajapinnat:
+API rajapinnat: 
+api avain: 755d6360e73044b5b9a113414242002
 
 ## 5	TESTAUS
 Testaus strategia:
