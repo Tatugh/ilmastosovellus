@@ -68,7 +68,7 @@ Käyttöliittymä tulee sisältää seuraavat asiat:
 -	Käyttöliittymän tulee toimia eri laitteilla, (työpöytä, mobiili)
 
 API rajapinnat: 
-api avain: 755d6360e73044b5b9a113414242002
+https://open-meteo.com
 
 ## 5	TESTAUS
 Testaus strategia:
