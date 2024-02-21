@@ -85,7 +85,7 @@ Tulokset:
 ## 6	PROJEKTIN HALLINTA
 Aikajana ja milestonet:
 - ***Viikko* 1**: Teknologiat valittu, henkilistö kirjoitettu dokumenttiin, dokumentoinnin väsääminen. Ensimmäinen commit gittiin
-- ***Viikko* 2**: API löydetty ja Martin lisätty projektiin. API toimii, testejä voi tehdä, routing toimii.
+- ***Viikko* 2**: API löydetty ja Martin lisätty projektiin. API toimii, testejä voi tehdä, routing toimii. Frontend/backend pystyy kommunikoimaan.
 
 Riskien hallinta / Laatuvaatimukset:
 -	Kommukunikoidaan jos on ongelmia tai kun muutoksia tehdään 
@@ -97,3 +97,13 @@ Riskien hallinta / Laatuvaatimukset:
 -	Kaikki käyttää samoja teknologioita
 -	Koodi seuraa jotain standardia (funktio/metodi, muuttujat, etc. Nimetään samalla tavalla)
 -	Javascript ei typescript
+
+# Hyödylliset komennot ja tietoa
+Kun haluaa käyttää sekä frontend että backend samanaikaisesti, pitää `npm run dev` frontend sekä backend kansioissa.
+- ```npm run dev```
+- ```npm test tests```
+- ```git pull```
+- ```git add```
+- ```git commit```
+- ```git push```
+- ```git checkout```

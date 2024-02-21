@@ -31,13 +31,13 @@ body {
   text-align: center;
 }
 
-.price-container {
+.weather-container {
   background-color: rgba(256,0,0,0.8);
   border-radius: 50%;
   position: relative;
   left: 50%;
-  width:100px;
-  height:100px;
+  width: auto;
+  height: auto;
 }
 
 .logo {
