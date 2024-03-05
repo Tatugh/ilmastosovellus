@@ -16,6 +16,7 @@ Roolit:
 -	Janne Toivanen, Kehittäjä
 -	Heikki Järvelä, Kehittäjä 
 -	Arttu Nurminoro, Kehittäjä
+-	Martin Nipuli, Kehittäjä
 
 Tapaamiset tiistaisin (sprint review sekä uusi sprint planning). Kommunikoimiseen käytetään discord
 
@@ -86,6 +87,7 @@ Tulokset:
 Aikajana ja milestonet:
 - ***Viikko* 1**: Teknologiat valittu, henkilistö kirjoitettu dokumenttiin, dokumentoinnin väsääminen. Ensimmäinen commit gittiin
 - ***Viikko* 2**: API löydetty ja Martin lisätty projektiin. API toimii, testejä voi tehdä, routing toimii. Frontend/backend pystyy kommunikoimaan. API hajautettu current, hourly ja daily.
+- ***Viikko* 3**: Tehtävät jaettu seuraavaa kertaa varten.
 
 Riskien hallinta / Laatuvaatimukset:
 -	Kommukunikoidaan jos on ongelmia tai kun muutoksia tehdään 
