@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 //fetches from current weather data from backend
-function currentWeatherUpdater() {
+function CurrentWeather() {
   const [weather, setWeather] = useState(0);
   useEffect(() => {
     const fetchCurrentWeather = async () => {
@@ -24,7 +24,15 @@ function currentWeatherUpdater() {
       clearInterval(priceUpdateInterval); // Clean up the interval when the component unmounts
     }
   }, []); // Empty dependency array ensures this runs only once
-  return weather;
+  if (weather)
+    return <div>
+        Lämpöaste: {weather.temperature_2m} °C <br/>
+        Kosteus: {weather.relative_humidity_2m} %<br/>
+        Tuulen Nopeus: {weather.wind_speed_10m} km/h<br/>
+        Precipitation: {weather.precipitation} mm<br/>
+    </div>
+  else
+    return <div>Ei sää tietoa</div>;
 }
 
-export {currentWeatherUpdater};
+export {CurrentWeather};
