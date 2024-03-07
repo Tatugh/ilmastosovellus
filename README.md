@@ -87,7 +87,7 @@ Tulokset:
 Aikajana ja milestonet:
 - ***Viikko* 1**: Teknologiat valittu, henkilistö kirjoitettu dokumenttiin, dokumentoinnin väsääminen. Ensimmäinen commit gittiin
 - ***Viikko* 2**: API löydetty ja Martin lisätty projektiin. API toimii, testejä voi tehdä, routing toimii. Frontend/backend pystyy kommunikoimaan. API hajautettu current, hourly ja daily.
-- ***Viikko* 3**: Tehtävät jaettu seuraavaa kertaa varten.
+- ***Viikko* 3**: Tehtävät jaettu seuraavaa kertaa varten. Frontend sää API nytten react komponentti.
 
 Riskien hallinta / Laatuvaatimukset:
 -	Kommukunikoidaan jos on ongelmia tai kun muutoksia tehdään 
