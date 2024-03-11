@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import * as weatherAPIHelper from './apis/WeatherAPIHelper.jsx'
+import DailyWeather from './components/DailyWeather.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,9 +15,11 @@ function App() {
       <div className="weather-container">
           <weatherAPIHelper.CurrentWeather/>
          </div>
+         
         <div className="content">
-          <p> Tässä on muuta tekstiä ja tietoja</p>
+          <p>Tässä on muuta tekstiä ja tietoja</p>
           <p>apina</p>
+          <DailyWeather></DailyWeather>
         </div>
       </div>
     </>
