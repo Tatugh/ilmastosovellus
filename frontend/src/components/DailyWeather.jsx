@@ -6,7 +6,7 @@ const DailyWeather = () => {
     const [tempMax, setTempMax] = useState([])
     const [tempMin, setTempMin] = useState([])
     const [tempAvg, setTempAvg] = useState([])
-    
+    const [sunnyDay, setSunnyDay] = useState([])    
     
     useEffect(() => {
         const check = async () => {
@@ -16,18 +16,17 @@ const DailyWeather = () => {
                 setDate(responseResult.time)
                 setTempMax(responseResult.temperature_2m_max)
                 setTempMin(responseResult.temperature_2m_min)
+                setSunnyDay(responseResult.sunshine_duration)
             } catch (error) {
                 console.log(error)
             }
         }
         check()
-
+        console.log(sunnyDay)
         //temperatureAverage()
     }, [])
     
-    const trimDate = () => {
-        let temporaryDate = date
-    }
+
     // const calculateAverage = (a, b) => {
     //     return Math.ceil((a + b) / 2)
     // }
@@ -45,8 +44,9 @@ const DailyWeather = () => {
             {date.map((item, index) => {
                 return (
                     <div key={item} className='weatherItems'>
-                        <h3>{item.slice(5)}</h3>
-                        <p>{Math.round(tempMax[index])}°C</p>
+                        <h3>{new Date(item).toLocaleDateString('fi-FI', {weekday: 'long'}).slice(0,2).toUpperCase()}</h3>
+                        <p>{sunnyDay[index] ? "Joo" : "Ei"}</p>
+                        <p>{Math.round(tempMin[index])} | {Math.round(tempMax[index])}°C</p>
                     </div>
                 )
             })}
