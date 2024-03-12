@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const DailyWeather = () => {
@@ -25,7 +25,9 @@ const DailyWeather = () => {
         //temperatureAverage()
     }, [])
     
-
+    const trimDate = () => {
+        let temporaryDate = date
+    }
     // const calculateAverage = (a, b) => {
     //     return Math.ceil((a + b) / 2)
     // }
