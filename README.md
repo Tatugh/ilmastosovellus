@@ -4,11 +4,10 @@ Projektin tavoitteena on toteuttaa applikaatio, jolla voidaan vertailla säätie
 
 -	React,
 -	Express, 
--	GitHub,
--	mongodb (mahdollisesti)
+-	GitHub
 
 ## 2	PROJEKTIN ORGANISAATIO
-Projektin jäseninä ovat Tatu Ruohoaho, Sepeteus Rosenlöf, Janne Toivanen, Heikki Järvelä ja Arttu Nurminoro.
+Projektin jäseninä ovat Tatu Ruohoaho, Sepeteus Rosenlöf, Janne Toivanen, Heikki Järvelä, Martin Nipuli ja Arttu Nurminoro.
 
 Roolit:
 -	Tatu Ruohoaho, Kehittäjä
@@ -38,6 +37,7 @@ Ei-toiminnaliset vaatimukset:
 
 Toimintaympäristön rajoitukset:
 -	Javascript
+-	Tailwind
 -	Node.js
 -	Express.js
 -	React
@@ -88,9 +88,10 @@ Aikajana ja milestonet:
 - ***Viikko* 1**: Teknologiat valittu, henkilistö kirjoitettu dokumenttiin, dokumentoinnin väsääminen. Ensimmäinen commit gittiin
 - ***Viikko* 2**: API löydetty ja Martin lisätty projektiin. API toimii, testejä voi tehdä, routing toimii. Frontend/backend pystyy kommunikoimaan. API hajautettu current, hourly ja daily.
 - ***Viikko* 3**: Tehtävät jaettu seuraavaa kertaa varten. Frontend sää API nytten react komponentti.
+- ***Viikko* 4**: Päivittäinen säätieto tehty. UI parannuksia. Tailwind lisätty projektiin (toimivuus epävarma). Lisää suunnittelua.
 
 Riskien hallinta / Laatuvaatimukset:
--	Kommukunikoidaan jos on ongelmia tai kun muutoksia tehdään 
+-	Kommunikoidaan jos on ongelmia tai kun muutoksia tehdään 
 -	Kysytään ChatGPT:ltä jos spaghettia alkaa muodostumaan
 -	Kaikilla oma dev branch GitHubissa
 -	Main branchiin merge jos testit läpi
