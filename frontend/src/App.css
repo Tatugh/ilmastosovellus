@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -17,7 +21,7 @@ body {
 .weatherTable{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 100px 200px;
+  grid-template-rows: auto;
 }
 
 .weatherItems {
@@ -27,6 +31,7 @@ body {
 
 .content-container {
   position: absolute;
+  justify-content: center;
   width: 69%;
   height: 100%;
   transform: translate(-50%,-50%);
@@ -45,10 +50,10 @@ body {
 .weather-container {
   background-color: rgba(256,0,0,0.8);
   border-radius: 50%;
-  position: relative;
-  left: 50%;
-  width: auto;
-  height: auto;
+  display: flex;
+  align-items: center;
+  width: 100px;
+  height: 100px;
 }
 
 .logo {
