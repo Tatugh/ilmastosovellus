@@ -25,12 +25,14 @@ function CurrentWeather() {
     }
   }, []); // Empty dependency array ensures this runs only once
   if (weather)
-    return <div>
-        Lämpöaste: {weather.temperature_2m} °C <br/>
+    return <>
+       <div className="weather-container">
+        Lämpöaste: {weather.temperature_2m} °C
+        </div>
         Kosteus: {weather.relative_humidity_2m} %<br/>
         Tuulen Nopeus: {weather.wind_speed_10m} km/h<br/>
         Precipitation: {weather.precipitation} mm<br/>
-    </div>
+    </>
   else
     return <div>Ei sää tietoa</div>;
 }
