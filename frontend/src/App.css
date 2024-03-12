@@ -14,6 +14,17 @@ body {
   z-index: -1;
 }
 
+.weatherTable{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 100px 200px;
+}
+
+.weatherItems {
+  border:1px solid black;
+  background-color:slategray
+}
+
 .content-container {
   position: absolute;
   width: 69%;
