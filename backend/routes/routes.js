@@ -24,5 +24,11 @@ router.get('/api/weather/daily', async(req, res) => {
   //res.render("index");
 })  
 
+//for list of locations in the app
+router.get('/api/location/data', async(req, res) => {
+  const searchTerm = req.query.q ?? ""
+  const locationData = await weatherAPI.fetchLocations(searchTerm);
+  res.send(locationData);
+})
 
   export default router;

@@ -3,6 +3,7 @@ import { fetchUserLatLong } from "./userAPI.js";
 const BASE_WEATHER_URL = 'https://api.open-meteo.com/v1/forecast?';
 const HARDCODED_WEATHER_QUERY = 'https://geocoding-api.open-meteo.com/v1/search?name=Mikkeli&current=temperature_2m';
 const userLocData = await fetchUserLatLong();
+const BASE_LOCATION_URL = "https://geocoding-api.open-meteo.com/v1/search?";
 
 //private function which creates a weather query based on given url and parameters (see HARDCODED_WEATHER_QUERY for example)
 async function _URLParamAggregator(url, params){
@@ -87,6 +88,27 @@ export async function fetchDailyWeatherData() {
             throw new Error("Could not fetch daily weather data");
         }
         return dailyWeatherData;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//fetches location data with given query and returns 5 locations matching the given name
+export async function fetchLocations(query) {
+    try {
+        if(query == ""){
+            return;
+        }
+        const params = {
+            "name": query
+        }
+        const LOCATION_DATA_QUERY = await _URLParamAggregator(BASE_LOCATION_URL, params);
+        console.log(LOCATION_DATA_QUERY);
+        const locationData = await _fetchData(LOCATION_DATA_QUERY)
+        if (!locationData) {
+            throw new Error("Could not find locations");
+        }
+        return locationData;
     } catch (error) {
         console.log(error);
     }
