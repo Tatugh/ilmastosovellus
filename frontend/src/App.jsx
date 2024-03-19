@@ -10,9 +10,12 @@ function App() {
   return (
     <>
       <div className="content-container">
-      <div className='location-container'>
-      <h1 className='current-location'>Mikkeli</h1>
-      <button className="btn-info">+</button>
+      <div className='location-container'>        
+          <Button className='btn-add'></Button>        
+          <h1 className='current-location'>Mikkeli</h1>
+          <Button className='button-dots'>
+          •••
+          </Button>
       </div>
       <h2>Current Weather Information:</h2>
       <div className="weather-container">
