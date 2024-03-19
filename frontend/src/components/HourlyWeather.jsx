@@ -26,9 +26,27 @@ function HourlyWeather() {
         fetchHourlyWeatherData();
     }, []);
 
+    const chartOptions = {
+        color: "white",
+      
+        scales: {
+        x: {
+          ticks: {
+            color: 'white', // Change x-axis font color here
+          },
+        },
+        y: {
+          ticks: {
+            color: 'white', // Change y-axis font color here
+          },
+        },
+      },
+    }
+
     return <div className = "weatherChart">
         <Line 
-            datasetIdKey='id'
+            options={chartOptions}
+            // datasetIdKey='id'
             data={{
                 labels: time,
                 datasets: [
@@ -36,11 +54,15 @@ function HourlyWeather() {
                     id: 1,
                     label: 'Temperature',
                     data: temperatures,
+                    borderColor: 'red',
+                    backgroundColor: 'red',
                 },
                 { 
                     id: 2,
                     label: 'Precipitation',
                     data: rain,
+                    borderColor: 'blue',
+                    backgroundColor: 'blue',
                 }
                 ],
             }

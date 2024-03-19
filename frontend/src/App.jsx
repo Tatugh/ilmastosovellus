@@ -20,7 +20,7 @@ function App() {
           <p>apina</p>
           <DailyWeather></DailyWeather>
         </div>
-        <div className="">
+        <div className="content">
           <p>Aaaaa</p>
           <HourlyWeather/>
         </div>
