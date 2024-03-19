@@ -40,6 +40,29 @@ body {
   height: auto;
 }
 
+.location-container {
+  background-color: cadetblue;
+  width: 400px;
+  height: auto;
+  border-color: #141414;
+  position:relative;
+  margin:auto;
+  box-sizing: border-box;
+  padding: auto;
+  border: 3px;
+}
+
+.current-location {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 48px;
+  position: relative;
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.5),  
+  1px -1px 0 rgba(0, 0, 0, 0.5),
+  -1px 1px 0 rgba(0, 0, 0, 0.5),
+  1px 1px 0 rgba(0, 0, 0, 0.5);
+  
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
