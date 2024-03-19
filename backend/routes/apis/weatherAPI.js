@@ -58,7 +58,8 @@ export async function fetchHourlyWeatherData() {
         const params = {
           "latitude": userLocData.latitude,
           "longitude": userLocData.longitude,
-          "hourly": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "precipitation_probability", "precipitation", "rain", "showers", "snowfall", "snow_depth", "pressure_msl", "surface_pressure", "visibility", "wind_speed_10m", "wind_speed_80m", "uv_index", "is_day", "sunshine_duration"],
+          "hourly": ["temperature_2m", "relative_humidity_2m", "precipitation_probability", "precipitation", "wind_speed_10m"],
+          "forecast_days": 2
         };
         const HOURLY_WEATHER_QUERY = await _URLParamAggregator(BASE_WEATHER_URL, params);
         const hourlyWeatherData = await _fetchData(HOURLY_WEATHER_QUERY);
