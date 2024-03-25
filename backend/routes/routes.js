@@ -5,7 +5,10 @@ const router = express.Router();
   
 //for current weather data
 router.get('/api/weather/current', async(req, res) => {
-    const weatherData = await weatherAPI.fetchCurrentWeatherData();
+    const Longitude = req.query.longitude;
+    const Latitude = req.query.latitude;
+    const Location = {Longitude, Latitude}
+    const weatherData = await weatherAPI.fetchCurrentWeatherData(Location);
     res.send(weatherData);
     //res.render("index");
 })

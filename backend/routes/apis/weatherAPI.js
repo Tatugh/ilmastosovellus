@@ -33,14 +33,31 @@ async function _fetchData(WEATHER_QUERY){
 }
 
 //fetches the most recent available weather data
-export async function fetchCurrentWeatherData() {
+export async function fetchCurrentWeatherData(query) {
     try {
         //url parameters to use for query
-        const params = {
-          "latitude": userLocData.latitude,
-          "longitude": userLocData.longitude,
-          "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],
-        };
+        
+        // const params = {
+        //   "latitude": query.Latitude ? query.Latitude : userLocData.latitude,
+        //   "longitude": query.Longitude ? query.Longitude : userLocData.longitude,
+        //   "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],
+        // };
+
+        let params;
+        if(query.Longitude === undefined || query.Latitude === undefined) {
+            params = {
+                "latitude": userLocData.latitude,
+                "longitude": userLocData.longitude,
+                "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],             
+            }
+        } else {
+            params = {
+                "latitude": query.Latitude,
+                "longitude": query.Longitude,
+                "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],             
+            }
+        }
+
         const CURRENT_WEATHER_QUERY = await _URLParamAggregator(BASE_WEATHER_URL, params);
         const curWeatherData = await _fetchData(CURRENT_WEATHER_QUERY) ;
         if (!curWeatherData){
