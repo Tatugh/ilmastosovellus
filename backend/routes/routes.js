@@ -5,21 +5,33 @@ const router = express.Router();
   
 //for current weather data
 router.get('/api/weather/current', async(req, res) => {
-    const weatherData = await weatherAPI.fetchCurrentWeatherData();
+    const LocationQuery = {
+      "Longitude": req.query.longitude,
+      "Latitude": req.query.latitude
+    }
+    const weatherData = await weatherAPI.fetchCurrentWeatherData(LocationQuery);
     res.send(weatherData);
     //res.render("index");
 })
 
 //for hourly weather data
 router.get('/api/weather/hourly', async(req, res) => {
-  const weatherData = await weatherAPI.fetchHourlyWeatherData();
+  const LocationQuery = {
+    "Longitude": req.query.longitude,
+    "Latitude": req.query.latitude,
+  }
+  const weatherData = await weatherAPI.fetchHourlyWeatherData(LocationQuery);
   res.send(weatherData);
   //res.render("index");
 })  
 
 //for daily weather data
 router.get('/api/weather/daily', async(req, res) => {
-  const weatherData = await weatherAPI.fetchDailyWeatherData();
+  const LocationQuery = {
+    "Longitude": req.query.longitude,
+    "Latitude": req.query.latitude,
+  }
+  const weatherData = await weatherAPI.fetchDailyWeatherData(LocationQuery);
   res.send(weatherData);
   //res.render("index");
 })  
