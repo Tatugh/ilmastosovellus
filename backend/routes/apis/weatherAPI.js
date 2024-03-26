@@ -36,28 +36,18 @@ async function _fetchData(WEATHER_QUERY){
 export async function fetchCurrentWeatherData(query) {
     try {
         //url parameters to use for query
-        
-        // const params = {
-        //   "latitude": query.Latitude ? query.Latitude : userLocData.latitude,
-        //   "longitude": query.Longitude ? query.Longitude : userLocData.longitude,
-        //   "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],
-        // };
-
-        let params;
-        if(query.Longitude === undefined || query.Latitude === undefined) {
-            params = {
-                "latitude": userLocData.latitude,
-                "longitude": userLocData.longitude,
-                "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],             
-            }
-        } else {
+        let params = {
+            "latitude": userLocData.latitude,
+            "longitude": userLocData.longitude,
+            "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],             
+        }
+        if(query.Longitude !== undefined || query.Latitude !== undefined) {
             params = {
                 "latitude": query.Latitude,
                 "longitude": query.Longitude,
                 "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],             
             }
         }
-
         const CURRENT_WEATHER_QUERY = await _URLParamAggregator(BASE_WEATHER_URL, params);
         const curWeatherData = await _fetchData(CURRENT_WEATHER_QUERY) ;
         if (!curWeatherData){
@@ -70,14 +60,20 @@ export async function fetchCurrentWeatherData(query) {
 }
 
 //should return weather data for a 24 hour (or other) period of time, currently returns hourly data for a 24 hour period of time for 7 days (including current day) 
-export async function fetchHourlyWeatherData() {
+export async function fetchHourlyWeatherData(query) {
     try {
         //url parameters to use for query
-        const params = {
+
+        let params = {
           "latitude": userLocData.latitude,
           "longitude": userLocData.longitude,
           "hourly": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "precipitation_probability", "precipitation", "rain", "showers", "snowfall", "snow_depth", "pressure_msl", "surface_pressure", "visibility", "wind_speed_10m", "wind_speed_80m", "uv_index", "is_day", "sunshine_duration"],
         };
+        if(query.Longitude !== undefined && query.Latitude !== undefined) {
+            params.latitude = query.Latitude;
+            params.longitude = query.Longitude
+        }
+        console.log(params)
         const HOURLY_WEATHER_QUERY = await _URLParamAggregator(BASE_WEATHER_URL, params);
         const hourlyWeatherData = await _fetchData(HOURLY_WEATHER_QUERY);
         if (!hourlyWeatherData){
@@ -91,7 +87,7 @@ export async function fetchHourlyWeatherData() {
 
 
 //fetches weather data for 7 days (including current day), estimates are for whole day (NO HOURLY)
-export async function fetchDailyWeatherData() {
+export async function fetchDailyWeatherData(query) {
     try {
         //url parameters to use for query
         const params = {
@@ -99,6 +95,10 @@ export async function fetchDailyWeatherData() {
           "longitude": userLocData.longitude,
           "daily": ["temperature_2m_max", "temperature_2m_min", ,"sunrise", "sunset", "daylight_duration", "sunshine_duration", "uv_index_max", "precipitation_probability_max","wind_speed_10m_max"]
         };
+        if(query.Longitude !== undefined && query.Latitude !== undefined) {
+            params.longitude = query.Longitude;
+            params.latitude = query.Latitude;
+        }
         const DAILY_WEATHER_QUERY = await _URLParamAggregator(BASE_WEATHER_URL, params);
         const dailyWeatherData = await _fetchData(DAILY_WEATHER_QUERY);
         if (!dailyWeatherData){
