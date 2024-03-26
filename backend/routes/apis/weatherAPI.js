@@ -93,7 +93,7 @@ export async function fetchHourlyWeatherData(query) {
 export async function fetchDailyWeatherData(query) {
     try {
         //url parameters to use for query
-        const params = {
+        let params = {
           "latitude": userLocData.latitude,
           "longitude": userLocData.longitude,
           "daily": ["temperature_2m_max", "temperature_2m_min", ,"sunrise", "sunset", "daylight_duration", "sunshine_duration", "uv_index_max", "precipitation_probability_max","wind_speed_10m_max"]
