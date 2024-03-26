@@ -63,7 +63,10 @@ export async function fetchCurrentWeatherData(query) {
 export async function fetchHourlyWeatherData(query) {
     try {
         //url parameters to use for query
-
+        /*
+        example url with location longitude and latitude query
+        http://localhost:3001/api/weather/hourly?latitude=30.63445&longitude=24.23145 
+        */
         let params = {
           "latitude": userLocData.latitude,
           "longitude": userLocData.longitude,
