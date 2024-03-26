@@ -8,7 +8,11 @@ const router = express.Router();
 
 //for current weather data
 router.get('/api/weather/current/', verifyCache, async(req, res) => {
-    const weatherData = await weatherAPI.fetchCurrentWeatherData();
+    const LocationQuery = {
+      "Longitude": req.query.longitude,
+      "Latitude": req.query.latitude
+    }
+    const weatherData = await weatherAPI.fetchCurrentWeatherData(LocationQuery);
     const pathId = pathFinal(req.path);
     cache.set(pathId)
     res.send(weatherData);
@@ -17,8 +21,12 @@ router.get('/api/weather/current/', verifyCache, async(req, res) => {
   
   //for hourly weather data
   router.get('/api/weather/hourly', verifyCache, async(req, res) => {
+  const LocationQuery = {
+    "Longitude": req.query.longitude,
+    "Latitude": req.query.latitude,
+  }
     const pathId = pathFinal(req.path);
-    const weatherData = await weatherAPI.fetchHourlyWeatherData();
+    const weatherData = await weatherAPI.fetchHourlyWeatherData(LocationQuery);
     cache.set(pathId, weatherData);
     res.send(weatherData);
     //res.render("index");
@@ -27,8 +35,12 @@ router.get('/api/weather/current/', verifyCache, async(req, res) => {
   
   //for daily weather data
   router.get('/api/weather/daily/:id', verifyCache, async(req, res) => {
+  const LocationQuery = {
+    "Longitude": req.query.longitude,
+    "Latitude": req.query.latitude,
+  }
     const pathId = pathFinal(req.path);
-    const weatherData = await weatherAPI.fetchDailyWeatherData();
+    const weatherData = await weatherAPI.fetchDailyWeatherData(LocationQuery);
     cache.set(pathId,weatherData)
     res.send(weatherData);
     //res.render("index");
