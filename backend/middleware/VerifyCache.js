@@ -1,17 +1,21 @@
 import { nodeCache } from '../src/deps.js'
+import { pathFinal } from '../utils/utils.js';
 
 export const cache = new nodeCache({stdTTl: 60*15})
 
-const verifyCache = (req, res, next) => {
+const verifyCache = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        if (cache.get(id) !== undefined){
-            return res.json(cache.get(id))
+        const pathId = pathFinal(req.path);
+
+        if (cache.get(pathId) !== undefined){
+            const data = await cache.get(pathId);
+
+            return res.send(data);
         }
+
         return next()
     } catch (error) {
-        console.log("hello");
-        res.send({error: error})
+        res.send({error: error});
     }
 }
 
