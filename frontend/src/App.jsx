@@ -3,20 +3,14 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import * as weatherAPIHelper from './apis/WeatherAPIHelper.jsx'
-import Button from "react-bootstrap/Button";
+import LocationDisplay from './components/location.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
   return (
     <>
       <div className="content-container">
-      <div className='location-container'>        
-          <Button className='btn-add'></Button>        
-          <h1 className='current-location'>Mikkeli</h1>
-          <Button className='button-dots'>
-          •••
-          </Button>
-      </div>
+      <LocationDisplay />
       <h2>Current Weather Information:</h2>
       <div className="weather-container">
           <weatherAPIHelper.CurrentWeather/>
