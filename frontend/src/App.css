@@ -33,7 +33,7 @@ body {
   position: absolute !important;
   width: 69% !important;
   height: 100% !important;
-  transform: translate(-50%,-50%) !important;
+  transform: translate(-50%, -50%) !important;
   background-color: rgba(100,100,100,0.9) !important;
   padding:20px !important;
   border-radius: 10px !important;
@@ -191,4 +191,11 @@ body {
 
 .dropdown-toggle:after {
   border: none !important;
+}
+
+
+.weatherChart{
+  position: relative;
+  height: 100% !important;
+  width: 100% !important;
 }

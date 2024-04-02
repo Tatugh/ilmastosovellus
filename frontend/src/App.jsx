@@ -21,7 +21,7 @@ function App() {
           <DailyWeather></DailyWeather>
         </div>
         <div className="content">
-          <p>Aaaaa</p>
+          <p>Tuntikohtaiset säätiedot</p>
           <HourlyWeather/>
         </div>
       </div>
