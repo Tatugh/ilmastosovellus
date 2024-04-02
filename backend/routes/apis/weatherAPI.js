@@ -3,6 +3,7 @@ import { fetchUserLatLong } from "./userAPI.js";
 const BASE_WEATHER_URL = 'https://api.open-meteo.com/v1/forecast?';
 const HARDCODED_WEATHER_QUERY = 'https://geocoding-api.open-meteo.com/v1/search?name=Mikkeli&current=temperature_2m';
 const userLocData = await fetchUserLatLong();
+const BASE_LOCATION_URL = "https://geocoding-api.open-meteo.com/v1/search?";
 
 //private function which creates a weather query based on given url and parameters (see HARDCODED_WEATHER_QUERY for example)
 async function _URLParamAggregator(url, params){
@@ -32,14 +33,21 @@ async function _fetchData(WEATHER_QUERY){
 }
 
 //fetches the most recent available weather data
-export async function fetchCurrentWeatherData() {
+export async function fetchCurrentWeatherData(query) {
     try {
         //url parameters to use for query
-        const params = {
-          "latitude": userLocData.latitude,
-          "longitude": userLocData.longitude,
-          "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],
-        };
+        let params = {
+            "latitude": userLocData.latitude,
+            "longitude": userLocData.longitude,
+            "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],             
+        }
+        if(query.Longitude !== undefined || query.Latitude !== undefined) {
+            params = {
+                "latitude": query.Latitude,
+                "longitude": query.Longitude,
+                "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],             
+            }
+        }
         const CURRENT_WEATHER_QUERY = await _URLParamAggregator(BASE_WEATHER_URL, params);
         const curWeatherData = await _fetchData(CURRENT_WEATHER_QUERY) ;
         if (!curWeatherData){
@@ -52,15 +60,24 @@ export async function fetchCurrentWeatherData() {
 }
 
 //should return weather data for a 24 hour (or other) period of time, currently returns hourly data for a 24 hour period of time for 7 days (including current day) 
-export async function fetchHourlyWeatherData() {
+export async function fetchHourlyWeatherData(query) {
     try {
         //url parameters to use for query
-        const params = {
+        /*
+        example url with location longitude and latitude query
+        http://localhost:3001/api/weather/hourly?latitude=30.63445&longitude=24.23145 
+        */
+        let params = {
           "latitude": userLocData.latitude,
           "longitude": userLocData.longitude,
           "hourly": ["temperature_2m", "relative_humidity_2m", "precipitation_probability", "precipitation", "wind_speed_10m"],
           "forecast_days": 2
         };
+        if(query.Longitude !== undefined && query.Latitude !== undefined) {
+            params.latitude = query.Latitude;
+            params.longitude = query.Longitude
+        }
+        console.log(params)
         const HOURLY_WEATHER_QUERY = await _URLParamAggregator(BASE_WEATHER_URL, params);
         const hourlyWeatherData = await _fetchData(HOURLY_WEATHER_QUERY);
         if (!hourlyWeatherData){
@@ -74,20 +91,45 @@ export async function fetchHourlyWeatherData() {
 
 
 //fetches weather data for 7 days (including current day), estimates are for whole day (NO HOURLY)
-export async function fetchDailyWeatherData() {
+export async function fetchDailyWeatherData(query) {
     try {
         //url parameters to use for query
-        const params = {
+        let params = {
           "latitude": userLocData.latitude,
           "longitude": userLocData.longitude,
           "daily": ["temperature_2m_max", "temperature_2m_min", ,"sunrise", "sunset", "daylight_duration", "sunshine_duration", "uv_index_max", "precipitation_probability_max","wind_speed_10m_max"]
         };
+        if(query.Longitude !== undefined && query.Latitude !== undefined) {
+            params.longitude = query.Longitude;
+            params.latitude = query.Latitude;
+        }
         const DAILY_WEATHER_QUERY = await _URLParamAggregator(BASE_WEATHER_URL, params);
         const dailyWeatherData = await _fetchData(DAILY_WEATHER_QUERY);
         if (!dailyWeatherData){
             throw new Error("Could not fetch daily weather data");
         }
         return dailyWeatherData;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//fetches location data with given query and returns 5 locations matching the given name
+export async function fetchLocations(query) {
+    try {
+        if(query == ""){
+            return;
+        }
+        const params = {
+            "name": query
+        }
+        const LOCATION_DATA_QUERY = await _URLParamAggregator(BASE_LOCATION_URL, params);
+        console.log(LOCATION_DATA_QUERY);
+        const locationData = await _fetchData(LOCATION_DATA_QUERY)
+        if (!locationData) {
+            throw new Error("Could not find locations");
+        }
+        return locationData;
     } catch (error) {
         console.log(error);
     }
