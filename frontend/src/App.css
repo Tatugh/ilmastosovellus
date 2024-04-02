@@ -12,6 +12,8 @@
 body {
   background-image:url(assets/tuulis.jpg);
   background-repeat: no-repeat;
+  background-attachment: scroll; /* Allow scrolling */
+
   background-size: cover;
   width: 100%;
   height: 100%;
@@ -30,15 +32,17 @@ body {
 }
 
 .content-container {
-  position: absolute !important;
-  width: 69% !important;
-  height: 100% !important;
+  position: fixed !important;
+  width: 100vh !important;
+  height: fit-content !important;
+  overflow-y: auto; /* Enable vertical scrolling */
   transform: translate(-50%,-50%) !important;
   background-color: rgba(100,100,100,0.9) !important;
   padding:20px !important;
   border-radius: 10px !important;
   z-index: 1 !important;
-  max-width: 80% !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
 }
 
 .content {
@@ -191,4 +195,11 @@ body {
 
 .dropdown-toggle:after {
   border: none !important;
+}
+
+
+.weatherChart{
+  position: relative;
+  height: 100% !important;
+  width: 100% !important;
 }
