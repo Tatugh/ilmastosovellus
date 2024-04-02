@@ -56,8 +56,7 @@ function HourlyWeather() {
 
     return <div className = "weatherChart">
       <Line 
-        options={chartOptions}
-        // datasetIdKey='id'
+        options={chartOptions} width={"fit-content"} height={"fit-content"}      // datasetIdKey='id'
         data={{
           labels: time,
           datasets: [

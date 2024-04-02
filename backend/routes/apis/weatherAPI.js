@@ -77,7 +77,7 @@ export async function fetchHourlyWeatherData(query) {
             params.latitude = query.Latitude;
             params.longitude = query.Longitude
         }
-        console.log(params)
+        //console.log(params)
         const HOURLY_WEATHER_QUERY = await _URLParamAggregator(BASE_WEATHER_URL, params);
         const hourlyWeatherData = await _fetchData(HOURLY_WEATHER_QUERY);
         if (!hourlyWeatherData){
