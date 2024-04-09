@@ -29,6 +29,7 @@ function HourlyWeather() {
           
 
     const chartOptions = {
+      responsive: true,
       color: "white",
       scales: {
         x: {
