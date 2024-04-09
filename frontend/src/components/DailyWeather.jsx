@@ -10,6 +10,7 @@ const DailyWeather = () => {
     const [tempAvg, setTempAvg] = useState([])
     const [sunnyDay, setSunnyDay] = useState([])
     const [windSpeed, setWindSpeed] = useState([])
+    const [rainChance, setRainChance] = useState([])
     
     useEffect(() => {
         const check = async () => {
@@ -19,8 +20,9 @@ const DailyWeather = () => {
                 setDate(responseResult.time)
                 setTempMax(responseResult.temperature_2m_max)
                 setTempMin(responseResult.temperature_2m_min)
-                setSunnyDay(responseResult.precipitation_probability_max)
+                setSunnyDay(responseResult.sunshine_duration)
                 setWindSpeed(responseResult.wind_speed_10m_max)
+                setRainChance(responseResult.precipitation_probability_max)
             } catch (error) {
                 console.log(error)
             }
@@ -50,6 +52,8 @@ const DailyWeather = () => {
                     <div key={item} className='weatherItems'>
                         <h3>{new Date(item).toLocaleDateString('fi-FI', {weekday: 'long'}).slice(0,2).toUpperCase()}</h3>
                         <img className="weather-icon" src={sunnyDay[index] ? aurinko : pilvi }></img>
+                        <p>{windSpeed[index]} km/h</p>
+                        <p>{rainChance[index]} %</p>
                         <p>↑ {Math.round(tempMax[index])}°C</p>
                         <p>↓ {Math.round(tempMin[index])}°C</p>
                     </div>
