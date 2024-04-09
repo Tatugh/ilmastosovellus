@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import * as weatherAPIHelper from './apis/WeatherAPIHelper.jsx'
+import LocationDisplay from './components/location.jsx'
 import DailyWeather from './components/DailyWeather.jsx'
+import HourlyWeather from './components/HourlyWeather.jsx'
 
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <div className="content-container">
-      <h1 className="">Sähkö</h1>
+      <LocationDisplay />
       <h2>Current Weather Information:</h2>
         <weatherAPIHelper.CurrentWeather/>
          
@@ -19,6 +19,9 @@ function App() {
           <p>Tässä on muuta tekstiä ja tietoja</p>
           <p className=' text-gray-400'>apina</p>
           <DailyWeather></DailyWeather>
+        </div>
+        <div className="content">
+          <HourlyWeather/>
         </div>
       </div>
     </>

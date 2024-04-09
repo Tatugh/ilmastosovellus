@@ -1,4 +1,5 @@
 # ilmastosovellus
+version: 1.11
 ## 1	JOHDANTO
 Projektin tavoitteena on toteuttaa applikaatio, jolla voidaan vertailla säätietoja. Projekti toteutetaan aikavälillä 13.2–21.4.
 
@@ -89,7 +90,8 @@ Aikajana ja milestonet:
 - ***Viikko* 2**: API löydetty ja Martin lisätty projektiin. API toimii, testejä voi tehdä, routing toimii. Frontend/backend pystyy kommunikoimaan. API hajautettu current, hourly ja daily.
 - ***Viikko* 3**: Tehtävät jaettu seuraavaa kertaa varten. Frontend sää API nytten react komponentti.
 - ***Viikko* 4**: Päivittäinen säätieto tehty. UI parannuksia. Tailwind lisätty projektiin (toimivuus epävarma). Lisää suunnittelua.
-
+- ***Viikko* 5**: Cache toimii. UI parantelut jatkuu. Annetun lokaation perusteella datan haku.
+- ***Viikko* 6**: UI korjattu toimimaan eri ruuduilla. API testit weatherii varten tehty. Muuta tehty (TBA).
 Riskien hallinta / Laatuvaatimukset:
 -	Kommunikoidaan jos on ongelmia tai kun muutoksia tehdään 
 -	Kysytään ChatGPT:ltä jos spaghettia alkaa muodostumaan
