@@ -30,6 +30,13 @@ body {
   margin: auto;
   width: 3rem;
 }
+.raindrop{
+  width: 24px;
+}
+.rain-chance {
+  display: flex;
+  justify-content: center;
+}
 
 .weatherItems {
   border:1px solid black;
