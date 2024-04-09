@@ -39,13 +39,13 @@ export async function fetchCurrentWeatherData(query) {
         let params = {
             "latitude": userLocData.latitude,
             "longitude": userLocData.longitude,
-            "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],             
+            "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "sunshine_duration", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],             
         }
         if(query.Longitude !== undefined || query.Latitude !== undefined) {
             params = {
                 "latitude": query.Latitude,
                 "longitude": query.Longitude,
-                "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],             
+                "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "sunshine_duration", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],             
             }
         }
         const CURRENT_WEATHER_QUERY = await _URLParamAggregator(BASE_WEATHER_URL, params);
