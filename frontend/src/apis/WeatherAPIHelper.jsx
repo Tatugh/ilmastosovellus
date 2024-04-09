@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import aurinko from '../assets/aurinko.png'
+import pilvi from '../assets/pilvi.png'
 
 //fetches from current weather data from backend
 function CurrentWeather() {
@@ -26,12 +28,14 @@ function CurrentWeather() {
   }, []); // Empty dependency array ensures this runs only once
   if (weather)
     return <>
-       <div className="weather-container">
-        Lämpöaste: {weather.temperature_2m} °C
-        </div>
+       {/* <div className="relative mx-auto text-left bg-slate-400 p-2 w-fit h-fit box-border rounded-3xl border-1 border-slate-800 "> */}
+        <div className="text-left">
+        <div className="flex flex-row text-justify justify-end"><img className="w-14 mr-3 absolute" src={weather.sunshine_duration ? aurinko : pilvi}></img></div>
+        Lämpöaste: {weather.temperature_2m} °C <br/>
         Kosteus: {weather.relative_humidity_2m} %<br/>
         Tuulen Nopeus: {weather.wind_speed_10m} km/h<br/>
         Precipitation: {weather.precipitation} mm<br/>
+        </div>
     </>
   else
     return <div>Ei sää tietoa</div>;
