@@ -26,6 +26,11 @@ body {
   grid-template-rows: auto;
 }
 
+.weather-icon {
+  margin: auto;
+  width: 3rem;
+}
+
 .weatherItems {
   border:1px solid black;
   background-color:slategray
