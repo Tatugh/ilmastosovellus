@@ -1,5 +1,7 @@
 import  { useEffect, useState } from 'react'
 import axios from 'axios'
+import aurinko from '../assets/aurinko.png'
+import pilvi from '../assets/pilvi.png'
 
 const DailyWeather = () => {
     const [date, setDate] = useState([])
@@ -47,9 +49,9 @@ const DailyWeather = () => {
                 return (
                     <div key={item} className='weatherItems'>
                         <h3>{new Date(item).toLocaleDateString('fi-FI', {weekday: 'long'}).slice(0,2).toUpperCase()}</h3>
-                        <p>{windSpeed[index]} km/h</p>
-                        <p>{sunnyDay[index]} %</p>
-                        <p>{Math.round(tempMin[index])} | {Math.round(tempMax[index])}°C</p>
+                        <img className="weather-icon" src={sunnyDay[index] ? aurinko : pilvi }></img>
+                        <p>↑ {Math.round(tempMax[index])}°C</p>
+                        <p>↓ {Math.round(tempMin[index])}°C</p>
                     </div>
                 )
             })}
