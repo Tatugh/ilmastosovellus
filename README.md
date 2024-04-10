@@ -113,3 +113,8 @@ Kun haluaa käyttää sekä frontend että backend samanaikaisesti, pitää `npm
 - ```git commit```
 - ```git push```
 - ```git checkout```
+
+Powershell komento:
+- Tekee POST requestin API:lle ja hakee sen lokaatiot
+$url = "http://localhost:3001/api/location/data?q=Mikkeli"
+Invoke-WebRequest -Uri $url -Method Post

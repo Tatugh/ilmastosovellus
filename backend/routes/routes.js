@@ -48,9 +48,11 @@ router.get('/api/weather/current', verifyCache, async(req, res) => {
 })  
 
 //for list of locations in the app
-router.get('/api/location/data', async(req, res) => {
+router.post('/api/location/data', async(req, res) => {
   const searchTerm = req.query.q ?? ""
+  console.log(searchTerm)
   const locationData = await weatherAPI.fetchLocations(searchTerm);
+  console.log(locationData, searchTerm)
   res.send(locationData);
 })
 
