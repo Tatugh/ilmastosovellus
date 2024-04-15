@@ -11,7 +11,7 @@ const LocationDisplay = () => {
     const [query, setQuery] = useState("")
     const [locations, setLocations] = useState([])
     const [selectedLocation, setLocation] = useState({})
-
+    const [locationName, _] = useState(localStorage.getItem("locationData") || {"name": "Mikkeli"})
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -87,7 +87,7 @@ const LocationDisplay = () => {
             </Modal.Body>
           </Modal>
           
-          <h1 className='current-location'>Mikkeli</h1>
+          <h1 className='current-location'>{JSON.parse(locationName).name}</h1>
           <Dropdown>
             <Dropdown.Toggle className="button-dots">•••</Dropdown.Toggle>
             <Dropdown.Menu>
