@@ -124,7 +124,7 @@ export async function fetchLocations(query) {
             "name": query
         }
         const LOCATION_DATA_QUERY = await _URLParamAggregator(BASE_LOCATION_URL, params);
-        console.log(LOCATION_DATA_QUERY);
+        //console.log(LOCATION_DATA_QUERY);
         const locationData = await _fetchData(LOCATION_DATA_QUERY)
         if (!locationData) {
             throw new Error("Could not find locations");

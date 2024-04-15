@@ -8,9 +8,22 @@ function CurrentWeather() {
   useEffect(() => {
     const fetchCurrentWeather = async () => {
       try {
-        const longitude = 27.27227;
-        const latitude = 61.68857;
-        const response = await fetch(`http://localhost:3001/api/weather/current?q={"longitude": ${longitude}, "latitude": ${latitude}}`);
+        //get location data
+        const location = JSON.parse(localStorage.getItem("locationData"));
+        let response;
+        //if user has selected a location different from their geolocation, then get the selected location's weather data
+        if (location !== null && location.expiration > Date.now()){
+          const longitude = location.longitude;
+          const latitude = location.latitude;
+          const name = location.name;
+          response = await fetch(`http://localhost:3001/api/weather/current?name=${name}&longitude=${longitude}&latitude=${latitude}`);          
+        } else{
+          //clean out location out of localStorage every 1 hour - localStorage is persistent
+          if (location && location.expiration < Date.now()){
+              localStorage.removeItem("locationData")
+            }
+          response = await fetch(`http://localhost:3001/api/weather/current?name=""`);
+        }
         if (!response.ok) {
           throw new Error('Network response error');
         }

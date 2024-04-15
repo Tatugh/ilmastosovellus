@@ -19,18 +19,18 @@ const LocationDisplay = () => {
     // Then sets the data as valid JSON string to localStrorage with key of 'locationData'
     // When you get 'locationData' from localStorage you have to parse the JSON string data with builtin function
     // 'JSON.parse()'. This returns a valid JSON object which then can be used for later purposes
-    // const setLocalStorage = (data) => {
-    //     const locData = data.results.map((location) => {
-    //         return {
-    //             name: location.name,
-    //             longitude: location.longitude,
-    //             latitude: location.latitude
-    //         }
-    //     })
-    //     const JSONifiedLocations= JSON.stringify(locData)
-    //     setLocations(locData)
-    //     localStorage.setItem("locationData", JSONifiedLocations)
-    // }
+    const locationDataCleaner = (data) => {//clean up data to get rid of unnecessary info and add expiration
+        const locData = data.results.map((location) => {
+            return {
+                name: location.name,
+                longitude: location.longitude,
+                latitude: location.latitude,
+                expiration: Date.now() + 1000 * 60 * 60 // 1 hour in milliseconds
+
+            }
+        })
+        setLocations(locData)
+    }
 
     const handleChange = (e) => {
         setQuery(e.target.value)
@@ -43,17 +43,19 @@ const LocationDisplay = () => {
             method: "POST"
         }).then((res) => {
             return res.json()  
-        // }).then((data) => {
-        //     setLocalStorage(data)
+        }).then((locData) => {
+            locationDataCleaner(locData)
         }).catch((err) => {
             console.error(err)
         })
     }
 
-    //save selected location to localStorage and empty out locations
+    //save selected location to localStorage, empty out locations and reload page to see changes
     const handleSubmit = () => {
         localStorage.setItem("locationData", JSON.stringify(selectedLocation))
-        setLocations([])
+        console.log(JSON.stringify(selectedLocation))
+        setLocations([])    
+        window.location.reload()
     }
     
     return (
@@ -67,8 +69,8 @@ const LocationDisplay = () => {
                 <Form onSubmit={handleClose}>
                     <Form.Control size="lg" type="text" placeholder="Narnia" onChange={handleChange}/>
                     <Modal.Footer>
-                        <button type="submit" className="btn btn-primary" onClick={handleSubmit}>OK</button>
                         <button type="button" className="btn btn-primary" onClick={handleSearch}>Search</button>
+                        <button type="submit" className="btn btn-primary" onClick={handleSubmit}>OK</button>
                     </Modal.Footer>
                 </Form>
                 {locations.length > 0 && (

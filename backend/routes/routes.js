@@ -12,8 +12,9 @@ router.get('/api/weather/current', verifyCache, async(req, res) => {
       "Longitude": req.query.longitude,
       "Latitude": req.query.latitude
     }
+    console.log(LocationQuery)
     const weatherData = await weatherAPI.fetchCurrentWeatherData(LocationQuery);
-    const pathId = pathFinal(req.path);
+    const pathId = pathFinal(req.path)+req.query.name;
     cache.set(pathId, weatherData);
     res.send(weatherData);
     //res.render("index");
@@ -25,7 +26,7 @@ router.get('/api/weather/current', verifyCache, async(req, res) => {
     "Longitude": req.query.longitude,
     "Latitude": req.query.latitude,
   }
-    const pathId = pathFinal(req.path);
+    const pathId = pathFinal(req.path)+req.query.name;
     const weatherData = await weatherAPI.fetchHourlyWeatherData(LocationQuery);
     cache.set(pathId, weatherData);
     res.send(weatherData);
@@ -39,7 +40,7 @@ router.get('/api/weather/current', verifyCache, async(req, res) => {
     "Longitude": req.query.longitude,
     "Latitude": req.query.latitude,
   }
-    const pathId = pathFinal(req.path);
+    const pathId = pathFinal(req.path)+req.query.name;
     const weatherData = await weatherAPI.fetchDailyWeatherData(LocationQuery);
     cache.set(pathId,weatherData)
     res.send(weatherData);
@@ -50,9 +51,9 @@ router.get('/api/weather/current', verifyCache, async(req, res) => {
 //for list of locations in the app
 router.post('/api/location/data', async(req, res) => {
   const searchTerm = req.query.q ?? ""
-  console.log(searchTerm)
+  //console.log(searchTerm)
   const locationData = await weatherAPI.fetchLocations(searchTerm);
-  console.log(locationData, searchTerm)
+  //console.log(locationData, searchTerm)
   res.send(locationData);
 })
 
