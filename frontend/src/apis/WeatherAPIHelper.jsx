@@ -8,7 +8,9 @@ function CurrentWeather() {
   useEffect(() => {
     const fetchCurrentWeather = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/weather/current');
+        const longitude = 27.27227;
+        const latitude = 61.68857;
+        const response = await fetch(`http://localhost:3001/api/weather/current?q={"longitude": ${longitude}, "latitude": ${latitude}}`);
         if (!response.ok) {
           throw new Error('Network response error');
         }
