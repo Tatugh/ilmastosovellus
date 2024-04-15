@@ -5,11 +5,10 @@ export const cache = new nodeCache({stdTTl: 60*15})
 
 const verifyCache = async (req, res, next) => {
     try {
-        const pathId = pathFinal(req.path);
+        const pathId = pathFinal(req.path)+req.query.name;
 
         if (cache.get(pathId) !== undefined){
             const data = await cache.get(pathId);
-
             return res.send(data);
         }
 
