@@ -25,6 +25,7 @@ body {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .weather-icon {
@@ -50,6 +51,7 @@ body {
   flex-direction: column;
   align-items: start;
   flex-wrap: wrap;
+  
   
 }
 .weatherItems {
