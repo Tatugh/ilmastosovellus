@@ -110,8 +110,9 @@ body {
 .location-container {
   display: flex !important;  
   background-color: cadetblue !important;
-  width: 40% !important;
-  height: 12% !important;
+  width: 40%;
+  height: 12%;
+  min-width: 219.2px;
   position:relative !important;
   margin:auto !important;
   box-sizing: border-box !important;
@@ -187,8 +188,9 @@ body {
 
 
 .current-location {
+  box-sizing: border-box;
   font-family:sans-serif !important;
-  font-size: 48px !important;
+  font-size: 48px;
   color: rgba(255,255,255, 0.85) !important;
   position: relative !important;
   text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.5),  

@@ -91,7 +91,7 @@ const LocationDisplay = () => {
             </Modal.Body>
           </Modal>
           
-          <h1 className='current-location'>{JSON.parse(locationName).name}</h1>
+          <h1 className='current-location text-3xl md:text-4xl xl:text-5xl'>{JSON.parse(locationName).name}</h1>
           <Dropdown>
             <Dropdown.Toggle className="button-dots">•••</Dropdown.Toggle>
             <Dropdown.Menu>
