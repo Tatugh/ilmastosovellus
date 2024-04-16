@@ -10,8 +10,8 @@ const LocationDisplay = () => {
     const [show, setShow] = useState(false);
     const [query, setQuery] = useState("")
     const [locations, setLocations] = useState([])
-    const [selectedLocation, setLocation] = useState({})
-    const [locationName, _] = useState(localStorage.getItem("locationData") || {"name": "Mikkeli"})
+    const [selectedLocation, setLocation] = useState(undefined)
+    const [locationName, _] = useState(localStorage.getItem("locationData"))
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -56,6 +56,10 @@ const LocationDisplay = () => {
         console.log(JSON.stringify(selectedLocation))
         setLocations([])    
         window.location.reload()
+    }
+
+    if(!localStorage.getItem("locationData")) {
+        localStorage.setItem("locationData", JSON.stringify({"name":"Mikkeli"}))
     }
     
     return (
