@@ -25,6 +25,7 @@ body {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .weather-icon {
@@ -51,12 +52,14 @@ body {
   align-items: start;
   flex-wrap: wrap;
   
+  
 }
 .weatherItems {
-  border:3px solid rgb(3, 37, 105);
+  /* border:3px solid rgb(3, 37, 105); */
   padding: 4px;
   font-size: 18px;
   color: rgb(231 229 228);
+  min-width: 110px;
   border-radius: 6px;
   margin: 2px;
   /* background-color:rgb(42, 91, 183); */
