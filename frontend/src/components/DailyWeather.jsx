@@ -5,6 +5,11 @@ import pilvi from '../assets/pilvi.png'
 import pisara from '../assets/pisara.png'
 import tuuli from '../assets/tuuli.png'
 
+import { TiArrowUpThick } from "react-icons/ti";
+import { TiArrowDownThick } from "react-icons/ti";
+import { GiWaterDrop } from "react-icons/gi";
+import { FiWind } from "react-icons/fi";
+
 const DailyWeather = () => {
     const [date, setDate] = useState([])
     const [tempMax, setTempMax] = useState([])
@@ -52,18 +57,28 @@ const DailyWeather = () => {
             {date.map((item, index) => {
                 return (
                     <div key={item} className='weatherItems'>
-                        <h3>{new Date(item).toLocaleDateString('fi-FI', {weekday: 'long'}).slice(0,2).toUpperCase()}</h3>
+                        <h3 className='pb-2 font-semibold'>{new Date(item).toLocaleDateString('fi-FI', {weekday: 'long'}).slice(0,2).toUpperCase()}</h3>
                         <img className="weather-icon" src={sunnyDay[index] ? aurinko : pilvi }></img>
-                        <div className='rain-chance'>
-                            <img className="raindrop" src={tuuli}></img>
-                            <p>{windSpeed[index]} km/h</p>
+                        <div className='weatherItems-content'>
+
+                            <div className='rain-chance'>
+                                <FiWind size={"1.5rem"}/>
+                                <p className='pl-2'>{windSpeed[index]}<small>km/h</small></p>
+                            </div>
+                            <div className='rain-chance'>
+                                <GiWaterDrop size={"1.5rem"} className='text-blue-200'/>
+                                <p className='pl-2'>{rainChance[index]}<small>%</small></p>
+                            </div>
+                            <div className='rain-chance text-red-400'>
+                                <TiArrowUpThick size={"1.5rem"}/>
+                                <p className='pl-2 font-extrabold '>{Math.round(tempMax[index])} °C</p>
+                            </div>
+                            <div className='rain-chance text-sky-300'>
+                                <TiArrowDownThick size={"1.5rem"}/>
+                                <p className='pl-2 font-extrabold text-blue-400'>{Math.round(tempMin[index])} °C</p>
+                            </div>
+                            
                         </div>
-                        <div className='rain-chance'>
-                            <img className="raindrop" src={pisara}></img>
-                            <p>{rainChance[index]} %</p>
-                        </div>
-                        <p>↑ {Math.round(tempMax[index])}°C</p>
-                        <p>↓ {Math.round(tempMin[index])}°C</p>
                     </div>
                 )
             })}

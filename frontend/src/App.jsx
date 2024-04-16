@@ -10,10 +10,13 @@ function App() {
     <>
       <div className="content-container">
       <LocationDisplay />
-      <div className='content weatherItems w-fit mx-auto px-1 rounded-md '>
-        <h2 className=' mb-1'>Current Weather Information</h2>
-        <div className='border-1 border-solid border-black w-full'></div>
-        <weatherAPIHelper.CurrentWeather/>
+      {/* <div className='content weatherItems w-fit mx-auto px-1 rounded-md '> */}
+      <div className='flex'>
+        <div className='weather-container w-fit mx-auto px-1 rounded-md '>
+          {/* <h2 className=' mb-1'>Current Weather Information</h2>
+          <div className='border-1 border-solid border-black w-full'></div> */}
+          <weatherAPIHelper.CurrentWeather/>
+        </div>
       </div>
         <div className="content">
           <DailyWeather></DailyWeather>

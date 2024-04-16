@@ -44,12 +44,12 @@ function CurrentWeather() {
   if (weather)
     return <>
        {/* <div className="relative mx-auto text-left bg-slate-400 p-2 w-fit h-fit box-border rounded-3xl border-1 border-slate-800 "> */}
-        <div className="text-left">
-        <div className="flex flex-row text-justify justify-end"><img className="w-14 mr-1 absolute" src={weather.sunshine_duration ? aurinko : pilvi}></img></div>
-        Lämpöaste: {weather.temperature_2m} °C <br/>
-        Kosteus: {weather.relative_humidity_2m} %<br/>
-        Tuulen Nopeus: {weather.wind_speed_10m} km/h<br/>
-        Precipitation: {weather.precipitation} mm<br/>
+        <div className="text-center">
+            <div className="flex flex-row text-justify justify-end"><img className="weather-icon w-24" src={weather.sunshine_duration ? aurinko : pilvi}></img></div>
+            <p id="current-temperature">{weather.temperature_2m} °C </p>
+            <p>Tuulen Nopeus: {weather.wind_speed_10m} km/h</p>
+            <p className="">Sateen määrä: {weather.precipitation} mm</p>
+            <p>Kosteus: {weather.relative_humidity_2m} %</p>
         </div>
     </>
   else
