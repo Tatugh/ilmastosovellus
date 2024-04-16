@@ -126,6 +126,8 @@ body {
   justify-content: center !important;
   text-align: center !important;
   background-image: url(assets/unsettled-weather-jim-lorriman.jpg);
+  background-repeat: no-repeat;
+  background-size:100%;
 }
 
 .btn-add {
