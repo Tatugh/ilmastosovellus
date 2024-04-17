@@ -1,22 +1,22 @@
-import { useState, useEffect } from 'react';
-import LocationDisplay from './location';
-import CurrentWeather from '../apis/WeatherAPIHelper';
-import HourlyWeather from './HourlyWeather';
-import DailyWeather from './DailyWeather';
-import WeatherNotification from './WeatherNotification';
+import { useState, useEffect } from "react";
+import LocationDisplay from "./location";
+import CurrentWeather from "./CurrentWeather";
+import HourlyWeather from "./HourlyWeather";
+import DailyWeather from "./DailyWeather";
+import WeatherNotification from "./WeatherNotification";
 const ParentComponent = () => {
   const [weatherCode, setWeatherCode] = useState(0);
   const [locationData, setLocationData] = useState(() => {
     try {
       const storedData = localStorage.getItem("locationData");
       if (storedData) {
-        console.log(typeof(storedData))
+        console.log(typeof storedData);
         return JSON.parse(storedData);
       }
     } catch (error) {
       console.error("Error parsing location data:", error);
     }
-  
+
     // Default value if parsing fails or data is not found in localStorage
     return { name: "Mikkeli" };
   });
@@ -38,23 +38,29 @@ const ParentComponent = () => {
   };
   return (
     <div>
-      <LocationDisplay locationData={locationData} onLocationChange={handleLocationChange} />
-    <div className='flex'>
-        <div className='weather-container w-fit mx-auto px-1 rounded-md '>
-        {/* <h2 className=' mb-1'>Current Weather Information</h2>
+      <LocationDisplay
+        locationData={locationData}
+        onLocationChange={handleLocationChange}
+      />
+      <div className="flex">
+        <div className="weather-container w-fit mx-auto px-1 rounded-md ">
+          {/* <h2 className=' mb-1'>Current Weather Information</h2>
         <div className='border-1 border-solid border-black w-full'></div> */}
-        <CurrentWeather locationData={locationData} setWeatherCode={setWeatherCode} />
+          <CurrentWeather
+            locationData={locationData}
+            setWeatherCode={setWeatherCode}
+          />
         </div>
-    </div>
-    <div className="content">
-      <WeatherNotification  weatherCode={weatherCode} />
-    </div>
-    <div className="content">
-          <DailyWeather locationData={locationData}/>
-        </div>
-    <div className="content">
-          <HourlyWeather locationData={locationData}/>
-    </div>
+      </div>
+      <div className="content">
+        <WeatherNotification weatherCode={weatherCode} />
+      </div>
+      <div className="content">
+        <DailyWeather locationData={locationData} />
+      </div>
+      <div className="content">
+        <HourlyWeather locationData={locationData} />
+      </div>
     </div>
   );
 };
