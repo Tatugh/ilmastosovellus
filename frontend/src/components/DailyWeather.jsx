@@ -10,7 +10,7 @@ import { TiArrowDownThick } from "react-icons/ti";
 import { GiWaterDrop } from "react-icons/gi";
 import { FiWind } from "react-icons/fi";
 
-const DailyWeather = () => {
+const DailyWeather = ({locationData}) => {
     const [date, setDate] = useState([])
     const [tempMax, setTempMax] = useState([])
     const [tempMin, setTempMin] = useState([])
@@ -22,7 +22,13 @@ const DailyWeather = () => {
     useEffect(() => {
         const check = async () => {
             try {
-                const response = await axios.get("http://localhost:3001/api/weather/daily")
+                let response;
+                if (locationData.longitude !== undefined && locationData.latitude !== undefined){
+                    response = await axios.get(`http://localhost:3001/api/weather/daily?name=${locationData.name}&longitude=${locationData.longitude}&latitude=${locationData.latitude}`)
+                }
+                else{
+                    response = await axios.get(`http://localhost:3001/api/weather/daily?name=""`)
+                }
                 const responseResult = await response.data.daily
                 setDate(responseResult.time)
                 setTempMax(responseResult.temperature_2m_max)
