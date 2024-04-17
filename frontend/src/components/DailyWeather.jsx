@@ -63,7 +63,7 @@ const DailyWeather = ({locationData}) => {
             {date.map((item, index) => {
                 return (
                     <div key={item} className='weatherItems'>
-                        <h3 className='pb-2 font-semibold'>{new Date(item).toLocaleDateString('fi-FI', {weekday: 'long'}).slice(0,2).toUpperCase()}</h3>
+                        <h3 className='pb-2 font-semibold'>{new Date(item).toLocaleDateString('en-EN', {weekday: 'long'}).slice(0,2).toUpperCase()}</h3>
                         <img className="weather-icon" src={sunnyDay[index] ? aurinko : pilvi }></img>
                         <div className='weatherItems-content'>
 

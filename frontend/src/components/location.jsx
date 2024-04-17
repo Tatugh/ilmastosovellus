@@ -51,9 +51,11 @@ const LocationDisplay = ({ locationData, onLocationChange }) => {
 
     //save selected location to localStorage, empty out locations and reload page to see changes
     const handleSubmit = () => {
-        localStorage.setItem("locationData", JSON.stringify(selectedLocation));
-        //console.log(JSON.stringify(selectedLocation));
-        onLocationChange(selectedLocation); // Pass the new location data to parent
+        if (selectedLocation){
+            localStorage.setItem("locationData", JSON.stringify(selectedLocation));
+            //console.log(JSON.stringify(selectedLocation));
+            onLocationChange(selectedLocation); // Pass the new location data to parent
+        }
       };
 
     if(!localStorage.getItem("locationData")) {
