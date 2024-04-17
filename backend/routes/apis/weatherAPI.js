@@ -39,13 +39,13 @@ export async function fetchCurrentWeatherData(query) {
         let params = {
             "latitude": userLocData.latitude,
             "longitude": userLocData.longitude,
-            "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "sunshine_duration", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],             
+            "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "sunshine_duration", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m", "weather_code"],             
         }
         if(query.Longitude !== undefined || query.Latitude !== undefined) {
             params = {
                 "latitude": query.Latitude,
                 "longitude": query.Longitude,
-                "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "sunshine_duration", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m"],             
+                "current": ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "sunshine_duration", "precipitation", "rain", "showers", "snowfall", "wind_speed_10m", "weather_code"],             
             }
         }
         const CURRENT_WEATHER_QUERY = await _URLParamAggregator(BASE_WEATHER_URL, params);
@@ -70,14 +70,13 @@ export async function fetchHourlyWeatherData(query) {
         let params = {
           "latitude": userLocData.latitude,
           "longitude": userLocData.longitude,
-          "hourly": ["temperature_2m", "relative_humidity_2m", "precipitation_probability", "precipitation", "wind_speed_10m"],
+          "hourly": ["temperature_2m", "relative_humidity_2m", "precipitation_probability", "precipitation", "wind_speed_10m", "weather_code"],
           "forecast_days": 2
         };
         if(query.Longitude !== undefined && query.Latitude !== undefined) {
             params.latitude = query.Latitude;
             params.longitude = query.Longitude
         }
-        //console.log(params)
         const HOURLY_WEATHER_QUERY = await _URLParamAggregator(BASE_WEATHER_URL, params);
         const hourlyWeatherData = await _fetchData(HOURLY_WEATHER_QUERY);
         if (!hourlyWeatherData){
@@ -97,7 +96,7 @@ export async function fetchDailyWeatherData(query) {
         let params = {
           "latitude": userLocData.latitude,
           "longitude": userLocData.longitude,
-          "daily": ["temperature_2m_max", "temperature_2m_min", ,"sunrise", "sunset", "daylight_duration", "sunshine_duration", "uv_index_max", "precipitation_probability_max","wind_speed_10m_max"]
+          "daily": ["temperature_2m_max", "temperature_2m_min", ,"sunrise", "sunset", "daylight_duration", "sunshine_duration", "uv_index_max", "precipitation_probability_max","wind_speed_10m_max", "weather_code"]
         };
         if(query.Longitude !== undefined && query.Latitude !== undefined) {
             params.longitude = query.Longitude;

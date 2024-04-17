@@ -10,7 +10,7 @@ import { TiArrowDownThick } from "react-icons/ti";
 import { GiWaterDrop } from "react-icons/gi";
 import { FiWind } from "react-icons/fi";
 
-const DailyWeather = () => {
+const DailyWeather = ({locationData}) => {
     const [date, setDate] = useState([])
     const [tempMax, setTempMax] = useState([])
     const [tempMin, setTempMin] = useState([])
@@ -22,7 +22,13 @@ const DailyWeather = () => {
     useEffect(() => {
         const check = async () => {
             try {
-                const response = await axios.get("http://localhost:3001/api/weather/daily")
+                let response;
+                if (locationData.longitude !== undefined && locationData.latitude !== undefined){
+                    response = await axios.get(`http://localhost:3001/api/weather/daily?name=${locationData.name}&longitude=${locationData.longitude}&latitude=${locationData.latitude}`)
+                }
+                else{
+                    response = await axios.get(`http://localhost:3001/api/weather/daily?name=""`)
+                }
                 const responseResult = await response.data.daily
                 setDate(responseResult.time)
                 setTempMax(responseResult.temperature_2m_max)
@@ -57,7 +63,7 @@ const DailyWeather = () => {
             {date.map((item, index) => {
                 return (
                     <div key={item} className='weatherItems'>
-                        <h3 className='pb-2 font-semibold'>{new Date(item).toLocaleDateString('fi-FI', {weekday: 'long'}).slice(0,2).toUpperCase()}</h3>
+                        <h3 className='pb-2 font-semibold'>{new Date(item).toLocaleDateString('en-EN', {weekday: 'long'}).slice(0,2).toUpperCase()}</h3>
                         <img className="weather-icon" src={sunnyDay[index] ? aurinko : pilvi }></img>
                         <div className='weatherItems-content'>
 

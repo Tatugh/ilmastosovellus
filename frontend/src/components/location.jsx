@@ -5,8 +5,7 @@ import "../App.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Dropdown from "react-bootstrap/Dropdown";
 
-
-const LocationDisplay = () => {
+const LocationDisplay = ({ locationData, onLocationChange }) => {
     const [show, setShow] = useState(false);
     const [query, setQuery] = useState("")
     const [locations, setLocations] = useState([])
@@ -52,11 +51,12 @@ const LocationDisplay = () => {
 
     //save selected location to localStorage, empty out locations and reload page to see changes
     const handleSubmit = () => {
-        localStorage.setItem("locationData", JSON.stringify(selectedLocation))
-        console.log(JSON.stringify(selectedLocation))
-        setLocations([])    
-        window.location.reload()
-    }
+        if (selectedLocation){
+            localStorage.setItem("locationData", JSON.stringify(selectedLocation));
+            //console.log(JSON.stringify(selectedLocation));
+            onLocationChange(selectedLocation); // Pass the new location data to parent
+        }
+      };
 
     if(!localStorage.getItem("locationData")) {
         localStorage.setItem("locationData", JSON.stringify({"name":"Mikkeli"}))

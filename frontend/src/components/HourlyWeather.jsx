@@ -15,14 +15,20 @@ function yScaleSize(array) {
   return (k + 1);
 }
 
-function HourlyWeather() {
+function HourlyWeather({locationData}) {
   const [time, setTime] = useState([]);
   const [temperatures, setTemperatures] = useState([]);
   const [rain, setRain] = useState([]);
   useEffect(() => {
     const fetchHourlyWeatherData = async () => {
         try {
-            const response = await fetch('http://localhost:3001/api/weather/hourly');
+          let response;
+          if (locationData.longitude !== undefined && locationData.latitude !== undefined){
+            response = await fetch(`http://localhost:3001/api/weather/hourly?name=${locationData.name}&longitude=${locationData.longitude}&latitude=${locationData.latitude}`);
+          }
+          else{
+            response = await fetch(`http://localhost:3001/api/weather/hourly?name=""`);
+          }
             if (!response.ok) {
               throw new Error('Network response error');
             }
