@@ -281,6 +281,10 @@ body {
 
 .nav-item a {
   color: white !important;
+  font-size: 20px;
+}
+.nav-item a:hover {
+  text-decoration: underline; /* Adds underline on hover */
 }
 .nav-item:not(:last-child) {
   margin-right: 10px;
@@ -331,4 +335,13 @@ body {
 .tos-container .disclaimer {
   color: white;
   font-style: italic; /* Italicize disclaimer text */
+}
+
+.footer-p a {
+  font-size: 15px !important;
+  color: white !important;
+}
+.footer-p a:hover {
+  color: pink !important;
+  text-decoration: underline; /* Adds underline on hover */
 }

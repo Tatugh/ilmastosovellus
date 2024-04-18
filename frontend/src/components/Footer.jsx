@@ -9,10 +9,8 @@ const Footer = () => {
           Copyright &copy; {new Date().getFullYear()} Your Company Name
         </p>
         <nav>
-          <div className="nav-item footer-p">
-            <Link to="/terms" style={{ color: "white" }}>
-              Terms of Service
-            </Link>
+          <div className="footer-p">
+            <Link to="/terms">Terms of Service</Link>
           </div>
         </nav>
       </div>

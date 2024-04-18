@@ -6,7 +6,7 @@ function Navbar() {
     <nav className="nav-bar">
       <div className="nav-container">
         <div className="nav-item">
-          <Link to="/">Etusivu</Link>
+          <Link to="/">Weather</Link>
         </div>
       </div>
     </nav>
