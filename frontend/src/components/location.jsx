@@ -5,7 +5,7 @@ import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-bootstrap/Dropdown";
 
-const LocationDisplay = ({ locationData, onLocationChange }) => {
+const LocationDisplay = ({ onLocationChange }) => {
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState("");
   const [locations, setLocations] = useState([]);

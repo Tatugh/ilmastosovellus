@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import LocationDisplay from "./location";
-import CurrentWeather from "./CurrentWeather";
-import HourlyWeather from "./HourlyWeather";
-import DailyWeather from "./DailyWeather";
-import WeatherNotification from "./WeatherNotification";
-const ParentComponent = () => {
+import LocationDisplay from "../components/Location";
+import CurrentWeather from "../components/CurrentWeather";
+import HourlyWeather from "../components/HourlyWeather";
+import DailyWeather from "../components/DailyWeather";
+import WeatherNotification from "../components/WeatherNotification";
+const Ilmasto = () => {
   const [weatherCode, setWeatherCode] = useState(0);
   const [locationData, setLocationData] = useState(() => {
     try {
@@ -38,10 +38,7 @@ const ParentComponent = () => {
   };
   return (
     <div>
-      <LocationDisplay
-        locationData={locationData}
-        onLocationChange={handleLocationChange}
-      />
+      <LocationDisplay onLocationChange={handleLocationChange} />
       <div className="flex">
         <div className="weather-container w-fit mx-auto px-1 rounded-md ">
           {/* <h2 className=' mb-1'>Current Weather Information</h2>
@@ -65,4 +62,4 @@ const ParentComponent = () => {
   );
 };
 
-export default ParentComponent;
+export default Ilmasto;

@@ -266,3 +266,82 @@ body {
   width: 100% !important;
   height: 100% !important;
 }
+
+.navbar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  background-color: #646cffaa;
+  z-index: 10;
+  margin-bottom: 50px;
+  filter: drop-shadow(3px 3px 5px #2d2d34);
+}
+
+.nav-item a {
+  color: white !important;
+  font-size: 20px;
+}
+.nav-item a:hover {
+  text-decoration: underline; /* Adds underline on hover */
+}
+.nav-item:not(:last-child) {
+  margin-right: 10px;
+}
+
+.nav-item:last-child {
+  margin-left: auto;
+  padding-right: 50px;
+}
+
+.nav-item button {
+  /* Remove all styles related to buttons */
+  background-color: inherit; /* Inherit background color from parent */
+  border: none; /* Remove button borders */
+  border-radius: 0; /* Remove button rounded corners */
+  padding: 0.5rem 1rem; /* Adjust padding as needed */
+  cursor: pointer; /* Indicate hoverability */
+}
+
+.nav-item a:hover {
+  color: pink !important;
+}
+
+.tos-p {
+  color: white;
+}
+.tos-container {
+  /* Adjust these styles as needed */
+  max-width: 800px;
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 2rem; /* Add some padding for readability */
+  font-family: sans-serif; /* Choose a clean font */
+  line-height: 1.5; /* Adjust line spacing for better readability */
+}
+
+.tos-container h1 {
+  color: white;
+  font-size: 1.5rem; /* Adjust heading size */
+  margin-bottom: 1rem; /* Add some space after the heading */
+}
+
+.tos-container h2 {
+  color: white;
+  font-size: 1.2rem; /* Slightly smaller heading size */
+  margin-bottom: 0.5rem; /* Less space after section headings */
+}
+
+.tos-container .disclaimer {
+  color: white;
+  font-style: italic; /* Italicize disclaimer text */
+}
+
+.footer-p a {
+  font-size: 15px !important;
+  color: white !important;
+}
+.footer-p a:hover {
+  color: pink !important;
+  text-decoration: underline; /* Adds underline on hover */
+}

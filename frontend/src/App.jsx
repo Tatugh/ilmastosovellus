@@ -1,12 +1,13 @@
 import "./App.css";
-import ParentComponent from "./components/ParentComponent.jsx";
-
+import Ilmasto from "./Pages/Ilmasto.jsx";
+import Footer from "./components/Footer.jsx";
 function App() {
   return (
     <>
       <div className="content-container">
         {/* <div className='content weatherItems w-fit mx-auto px-1 rounded-md '> */}
-        <ParentComponent />
+        <Ilmasto />
+        <Footer />
       </div>
     </>
   );
