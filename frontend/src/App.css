@@ -304,10 +304,9 @@ body {
   color: pink !important;
 }
 
-p {
-  color: white !important;
+.tos-p {
+  color: white;
 }
-
 .tos-container {
   /* Adjust these styles as needed */
   max-width: 800px;
@@ -327,4 +326,9 @@ p {
   color: white;
   font-size: 1.2rem; /* Slightly smaller heading size */
   margin-bottom: 0.5rem; /* Less space after section headings */
+}
+
+.tos-container .disclaimer {
+  color: white;
+  font-style: italic; /* Italicize disclaimer text */
 }
