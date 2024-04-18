@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import LocationDisplay from "./location";
-import CurrentWeather from "./CurrentWeather";
-import HourlyWeather from "./HourlyWeather";
-import DailyWeather from "./DailyWeather";
-import WeatherNotification from "./WeatherNotification";
+import LocationDisplay from "../components/Location";
+import CurrentWeather from "../components/CurrentWeather";
+import HourlyWeather from "../components/HourlyWeather";
+import DailyWeather from "../components/DailyWeather";
+import WeatherNotification from "../components/WeatherNotification";
 const ParentComponent = () => {
   const [weatherCode, setWeatherCode] = useState(0);
   const [locationData, setLocationData] = useState(() => {
