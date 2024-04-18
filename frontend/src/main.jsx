@@ -5,7 +5,6 @@ import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Terms from "./Pages/Terms.jsx";
-
 export default function Main() {
   return (
     <BrowserRouter>
