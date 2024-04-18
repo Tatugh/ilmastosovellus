@@ -4,7 +4,7 @@ import CurrentWeather from "../components/CurrentWeather";
 import HourlyWeather from "../components/HourlyWeather";
 import DailyWeather from "../components/DailyWeather";
 import WeatherNotification from "../components/WeatherNotification";
-const ParentComponent = () => {
+const Ilmasto = () => {
   const [weatherCode, setWeatherCode] = useState(0);
   const [locationData, setLocationData] = useState(() => {
     try {
@@ -38,10 +38,7 @@ const ParentComponent = () => {
   };
   return (
     <div>
-      <LocationDisplay
-        locationData={locationData}
-        onLocationChange={handleLocationChange}
-      />
+      <LocationDisplay onLocationChange={handleLocationChange} />
       <div className="flex">
         <div className="weather-container w-fit mx-auto px-1 rounded-md ">
           {/* <h2 className=' mb-1'>Current Weather Information</h2>
@@ -65,4 +62,4 @@ const ParentComponent = () => {
   );
 };
 
-export default ParentComponent;
+export default Ilmasto;

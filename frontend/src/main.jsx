@@ -3,9 +3,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
-
-import React, { useState } from "react";
-import Terms from "./components/Terms.jsx";
+import Terms from "./Pages/Terms.jsx";
 
 export default function Main() {
   return (
