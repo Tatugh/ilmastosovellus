@@ -3,10 +3,13 @@ import { Line } from "react-chartjs-2";
 import {Chart as ChartJS} from "chart.js/auto";
 
 function yScaleSize(array) {
+  // Changes the scaling on the precipitation axis depending on the fetched data
+  // If the precipitation values are less than 2mm then the min value on the y axis is limited to 2
+  // Otherwise y axis is always larger by 1 than the highest precipitation value
   let k = 0;
   array.forEach(i => {
     if(i > k) {
-      i = k;
+      k = i;
     }
   });
   if (k < 2){
