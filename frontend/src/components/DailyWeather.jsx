@@ -2,20 +2,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import aurinko from "../assets/aurinko.png";
 import pilvi from "../assets/pilvi.png";
-import pisara from "../assets/pisara.png";
-import tuuli from "../assets/tuuli.png";
-
 import { TiArrowUpThick } from "react-icons/ti";
 import { TiArrowDownThick } from "react-icons/ti";
 import { GiWaterDrop } from "react-icons/gi";
 import { FiWind } from "react-icons/fi";
 
-const DailyWeather = ({ locationData }) => {
+const DailyWeather = ({ locationData, port }) => {
   const [date, setDate] = useState([]);
   const [tempMax, setTempMax] = useState([]);
   const [tempMin, setTempMin] = useState([]);
-  const [tempAvg, setTempAvg] = useState([]);
-  const [sunnyDay, setSunnyDay] = useState([]);
+  const [weatherCode, setWeatherCode] = useState([]);
   const [windSpeed, setWindSpeed] = useState([]);
   const [rainChance, setRainChance] = useState([]);
 
@@ -28,18 +24,18 @@ const DailyWeather = ({ locationData }) => {
           locationData.latitude !== undefined
         ) {
           response = await axios.get(
-            `http://localhost:3001/api/weather/daily?name=${locationData.name}&longitude=${locationData.longitude}&latitude=${locationData.latitude}`
+            `http://localhost:${port}/api/weather/daily?name=${locationData.name}&longitude=${locationData.longitude}&latitude=${locationData.latitude}`
           );
         } else {
           response = await axios.get(
-            `http://localhost:3001/api/weather/daily?name=""`
+            `http://localhost:${port}/api/weather/daily?name=""`
           );
         }
         const responseResult = await response.data.daily;
         setDate(responseResult.time);
         setTempMax(responseResult.temperature_2m_max);
         setTempMin(responseResult.temperature_2m_min);
-        setSunnyDay(responseResult.sunshine_duration);
+        setWeatherCode(responseResult.weather_code);
         setWindSpeed(responseResult.wind_speed_10m_max);
         setRainChance(responseResult.precipitation_probability_max);
       } catch (error) {
@@ -47,7 +43,6 @@ const DailyWeather = ({ locationData }) => {
       }
     };
     check();
-    //console.log(sunnyDay);
   }, []);
 
   return (
@@ -63,7 +58,7 @@ const DailyWeather = ({ locationData }) => {
             </h3>
             <img
               className="weather-icon"
-              src={sunnyDay[index] ? aurinko : pilvi}
+              src={weatherCode[index] <= 2 ? aurinko : pilvi}
             ></img>
             <div className="weatherItems-content">
               <div className="rain-chance">

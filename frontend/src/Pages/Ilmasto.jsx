@@ -3,9 +3,8 @@ import LocationDisplay from "../components/Location";
 import CurrentWeather from "../components/CurrentWeather";
 import HourlyWeather from "../components/HourlyWeather";
 import DailyWeather from "../components/DailyWeather";
-import WeatherNotification from "../components/WeatherNotification";
 const Ilmasto = () => {
-  const [weatherCode, setWeatherCode] = useState(0);
+  const port = 3001; //for api end points
   const [locationData, setLocationData] = useState(() => {
     try {
       const storedData = localStorage.getItem("locationData");
@@ -38,25 +37,19 @@ const Ilmasto = () => {
   };
   return (
     <div>
-      <LocationDisplay onLocationChange={handleLocationChange} />
+      <LocationDisplay onLocationChange={handleLocationChange} port={port} />
       <div className="flex">
         <div className="weather-container w-fit mx-auto px-1 rounded-md ">
           {/* <h2 className=' mb-1'>Current Weather Information</h2>
         <div className='border-1 border-solid border-black w-full'></div> */}
-          <CurrentWeather
-            locationData={locationData}
-            setWeatherCode={setWeatherCode}
-          />
+          <CurrentWeather locationData={locationData} port={port} />
         </div>
       </div>
       <div className="content">
-        <WeatherNotification weatherCode={weatherCode} />
+        <DailyWeather locationData={locationData} port={port} />
       </div>
       <div className="content">
-        <DailyWeather locationData={locationData} />
-      </div>
-      <div className="content">
-        <HourlyWeather locationData={locationData} />
+        <HourlyWeather locationData={locationData} port={port} />
       </div>
     </div>
   );

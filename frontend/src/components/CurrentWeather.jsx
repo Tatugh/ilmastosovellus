@@ -3,8 +3,9 @@ import aurinko from "../assets/aurinko.png";
 import pilvi from "../assets/pilvi.png";
 
 //fetches from current weather data from backend
-function CurrentWeather({ locationData, setWeatherCode }) {
+function CurrentWeather({ locationData, port }) {
   const [weather, setWeather] = useState(0);
+  const [weatherCondition, setWeatherCondition] = useState("");
 
   useEffect(() => {
     const fetchCurrentWeather = async () => {
@@ -17,11 +18,11 @@ function CurrentWeather({ locationData, setWeatherCode }) {
           locationData.latitude !== undefined
         ) {
           response = await fetch(
-            `http://localhost:3001/api/weather/current?name=${locationData.name}&longitude=${locationData.longitude}&latitude=${locationData.latitude}`
+            `http://localhost:${port}/api/weather/current?name=${locationData.name}&longitude=${locationData.longitude}&latitude=${locationData.latitude}`
           );
         } else {
           response = await fetch(
-            `http://localhost:3001/api/weather/current?name=""`
+            `http://localhost:${port}/api/weather/current?name=""`
           );
         }
         if (!response.ok) {
@@ -29,7 +30,7 @@ function CurrentWeather({ locationData, setWeatherCode }) {
         }
         const curWeather = await response.json(); //get current weather from JSON
         setWeather(curWeather.current);
-        setWeatherCode(curWeather.current.weather_code);
+        setWeatherCondition(curWeather.current.weather_condition);
         console.log(curWeather.current.weather_code);
       } catch (error) {
         console.error("Error fetching current weather:", error);
@@ -52,10 +53,11 @@ function CurrentWeather({ locationData, setWeatherCode }) {
           <div className="flex flex-row text-justify justify-end">
             <img
               className="weather-icon w-24"
-              src={weather.weather_code <= 1 ? aurinko : pilvi}
+              src={weather.weather_code <= 2 ? aurinko : pilvi}
             ></img>
           </div>
           <p id="current-temperature">{weather.temperature_2m} °C </p>
+          <p>Condition: {weatherCondition}</p>
           <p>Wind Speed: {weather.wind_speed_10m} km/h</p>
           <p className="">Precipitation: {weather.precipitation} mm</p>
           <p>Humidity: {weather.relative_humidity_2m} %</p>

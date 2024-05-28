@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
-import { Chart as ChartJS } from "chart.js/auto";
+import { Chart as ChartJS } from "chart.js/auto"; //even though not used, it is required for the chart to work for unknown reasons
 
 function yScaleSize(array) {
   let k = 0;
@@ -15,7 +15,7 @@ function yScaleSize(array) {
   return k + 1;
 }
 
-function HourlyWeather({ locationData }) {
+function HourlyWeather({ locationData, port }) {
   const [time, setTime] = useState([]);
   const [temperatures, setTemperatures] = useState([]);
   const [rain, setRain] = useState([]);
@@ -28,11 +28,11 @@ function HourlyWeather({ locationData }) {
           locationData.latitude !== undefined
         ) {
           response = await fetch(
-            `http://localhost:3001/api/weather/hourly?name=${locationData.name}&longitude=${locationData.longitude}&latitude=${locationData.latitude}`
+            `http://localhost:${port}/api/weather/hourly?name=${locationData.name}&longitude=${locationData.longitude}&latitude=${locationData.latitude}`
           );
         } else {
           response = await fetch(
-            `http://localhost:3001/api/weather/hourly?name=""`
+            `http://localhost:${port}/api/weather/hourly?name=""`
           );
         }
         if (!response.ok) {

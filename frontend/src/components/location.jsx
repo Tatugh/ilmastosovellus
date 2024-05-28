@@ -5,7 +5,7 @@ import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-bootstrap/Dropdown";
 
-const LocationDisplay = ({ onLocationChange }) => {
+const LocationDisplay = ({ onLocationChange, port }) => {
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState("");
   const [locations, setLocations] = useState([]);
@@ -38,7 +38,7 @@ const LocationDisplay = ({ onLocationChange }) => {
   const handleSearch = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:3001/api/location/data?q=${query}`, {
+    fetch(`http://localhost:${port}/api/location/data?q=${query}`, {
       method: "POST",
     })
       .then((res) => {
