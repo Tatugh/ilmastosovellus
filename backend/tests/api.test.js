@@ -20,6 +20,7 @@ describe("Fetching weather data and checking responses", () => {
     expect(weatherData.current.showers).to.exist;
     expect(weatherData.current.snowfall).to.exist;
     expect(weatherData.current.wind_speed_10m).to.exist;
+    expect(weatherData.current.weather_code).to.exist;
   });
 
   // fetch hourly data and check that response matches expected values
@@ -43,5 +44,6 @@ describe("Fetching weather data and checking responses", () => {
     expect(weatherData.daily.uv_index_max).to.exist;
     expect(weatherData.daily.precipitation_probability_max).to.exist;
     expect(weatherData.daily.wind_speed_10m_max).to.exist;
+    expect(weatherData.daily.weather_code).to.exist;
   });
 });
