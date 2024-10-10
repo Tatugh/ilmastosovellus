@@ -9,7 +9,6 @@ const Ilmasto = () => {
     try {
       const storedData = localStorage.getItem("locationData");
       if (storedData) {
-        console.log(typeof storedData);
         return JSON.parse(storedData);
       }
     } catch (error) {

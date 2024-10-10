@@ -56,8 +56,9 @@ const LocationDisplay = ({ onLocationChange, port }) => {
   const handleSubmit = () => {
     if (selectedLocation) {
       localStorage.setItem("locationData", JSON.stringify(selectedLocation));
-      console.log(JSON.stringify(selectedLocation));
+      // console.log(JSON.stringify(selectedLocation));
       onLocationChange(selectedLocation); // Pass the new location data to parent
+      handleClose();
     }
   };
 
@@ -89,7 +90,7 @@ const LocationDisplay = ({ onLocationChange, port }) => {
                 Search
               </button>
               <button
-                type="submit"
+                type="button"
                 className="btn btn-primary"
                 onClick={handleSubmit}
               >

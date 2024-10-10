@@ -2,23 +2,11 @@ import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto"; //even though not used, it is required for the chart to work for unknown reasons
 
-function yScaleSize(array) {
-  let k = 0;
-  array.forEach((i) => {
-    if (i > k) {
-      i = k;
-    }
-  });
-  if (k < 2) {
-    k = 1;
-  }
-  return k + 1;
-}
-
 function HourlyWeather({ locationData, port }) {
   const [time, setTime] = useState([]);
   const [temperatures, setTemperatures] = useState([]);
   const [rain, setRain] = useState([]);
+  const [windSpeed, setWindSpeed] = useState([]);
   useEffect(() => {
     const fetchHourlyWeatherData = async () => {
       try {
@@ -45,13 +33,14 @@ function HourlyWeather({ locationData, port }) {
         setTime(formattedTime);
         setTemperatures(curWeather.hourly.temperature_2m);
         setRain(curWeather.hourly.precipitation);
-        // console.log(curWeather.hourly.time);
+        setWindSpeed(curWeather.hourly.wind_speed_10m);
+        console.log(curWeather);
       } catch (error) {
         console.error("Error fetching hourly weather:", error);
       }
     };
     fetchHourlyWeatherData();
-  }, []);
+  }, [locationData]);
 
   const chartOptions = {
     responsive: true,
@@ -67,7 +56,7 @@ function HourlyWeather({ locationData, port }) {
         title: {
           color: "white",
           display: true,
-          text: "C",
+          text: "Celsius",
         },
         position: "left",
         ticks: {
@@ -81,8 +70,20 @@ function HourlyWeather({ locationData, port }) {
           text: "mm",
         },
         position: "right",
-        min: 0,
-        max: yScaleSize(rain) ?? undefined,
+        ticks: {
+          color: "white",
+        },
+        grid: {
+          drawOnChartArea: false, // only want the grid lines for one axis to show up
+        },
+      },
+      y2: {
+        title: {
+          color: "white",
+          display: true,
+          text: "km/h",
+        },
+        position: "right",
         ticks: {
           color: "white",
         },
@@ -116,6 +117,15 @@ function HourlyWeather({ locationData, port }) {
               backgroundColor: "#34b9f7",
               type: "bar",
               yAxisID: "y1",
+            },
+            {
+              id: 3,
+              label: "Wind Speed",
+              data: windSpeed,
+              borderColor: "#DCDCDC",
+              backgroundColor: "#DCDCDC",
+              type: "line",
+              yAxisID: "y2",
             },
           ],
         }}

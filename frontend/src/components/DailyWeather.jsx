@@ -43,7 +43,7 @@ const DailyWeather = ({ locationData, port }) => {
       }
     };
     check();
-  }, []);
+  }, [locationData]);
 
   return (
     <div className="weatherTable">
