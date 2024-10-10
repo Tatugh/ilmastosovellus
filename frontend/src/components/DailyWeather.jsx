@@ -46,51 +46,53 @@ const DailyWeather = ({ locationData, port }) => {
   }, [locationData]);
 
   return (
-    <div className="weatherTable">
-      {date.map((item, index) => {
-        return (
-          <div key={item} className="weatherItems">
-            <h3 className="pb-2 font-semibold">
-              {new Date(item)
-                .toLocaleDateString("en-EN", { weekday: "long" })
-                .slice(0, 2)
-                .toUpperCase()}
-            </h3>
-            <img
-              className="weather-icon"
-              src={weatherCode[index] <= 2 ? aurinko : pilvi}
-            ></img>
-            <div className="weatherItems-content">
-              <div className="rain-chance">
-                <FiWind size={"1.5rem"} />
-                <p className="pl-2">
-                  {windSpeed[index]}
-                  <small>km/h</small>
-                </p>
-              </div>
-              <div className="rain-chance">
-                <GiWaterDrop size={"1.5rem"} className="text-blue-200" />
-                <p className="pl-2">
-                  {rainChance[index]}
-                  <small>%</small>
-                </p>
-              </div>
-              <div className="rain-chance text-red-400">
-                <TiArrowUpThick size={"1.5rem"} />
-                <p className="pl-2 font-extrabold ">
-                  {Math.round(tempMax[index])} °C
-                </p>
-              </div>
-              <div className="rain-chance text-sky-300">
-                <TiArrowDownThick size={"1.5rem"} />
-                <p className="pl-2 font-extrabold text-blue-400">
-                  {Math.round(tempMin[index])} °C
-                </p>
+    <div className="weatherTable-container">
+      <div className="weatherTable">
+        {date.map((item, index) => {
+          return (
+            <div key={item} className="weatherItems">
+              <h3 className="pb-2 font-semibold">
+                {new Date(item)
+                  .toLocaleDateString("en-EN", { weekday: "long" })
+                  .slice(0, 2)
+                  .toUpperCase()}
+              </h3>
+              <img
+                className="weather-icon"
+                src={weatherCode[index] <= 2 ? aurinko : pilvi}
+              ></img>
+              <div className="weatherItems-content">
+                <div className="rain-chance">
+                  <FiWind size={"1.5rem"} />
+                  <p className="pl-2">
+                    {windSpeed[index]}
+                    <small>km/h</small>
+                  </p>
+                </div>
+                <div className="rain-chance">
+                  <GiWaterDrop size={"1.5rem"} className="text-blue-200" />
+                  <p className="pl-2">
+                    {rainChance[index]}
+                    <small>%</small>
+                  </p>
+                </div>
+                <div className="rain-chance text-red-400">
+                  <TiArrowUpThick size={"1.5rem"} />
+                  <p className="pl-2 font-extrabold ">
+                    {Math.round(tempMax[index])} °C
+                  </p>
+                </div>
+                <div className="rain-chance text-sky-300">
+                  <TiArrowDownThick size={"1.5rem"} />
+                  <p className="pl-2 font-extrabold text-blue-400">
+                    {Math.round(tempMin[index])} °C
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };

@@ -10,7 +10,9 @@ const LocationDisplay = ({ onLocationChange, port }) => {
   const [query, setQuery] = useState("");
   const [locations, setLocations] = useState([]);
   const [selectedLocation, setLocation] = useState(undefined);
-  const [locationName, _] = useState(localStorage.getItem("locationData"));
+  const [locationName, setLocationName] = useState(
+    JSON.parse(localStorage.getItem("locationData")).name
+  );
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -59,6 +61,9 @@ const LocationDisplay = ({ onLocationChange, port }) => {
       // console.log(JSON.stringify(selectedLocation));
       onLocationChange(selectedLocation); // Pass the new location data to parent
       handleClose();
+      setQuery("");
+      setLocations([]);
+      setLocationName(selectedLocation.name);
     }
   };
 
@@ -122,7 +127,7 @@ const LocationDisplay = ({ onLocationChange, port }) => {
       </Modal>
 
       <h1 className="current-location text-3xl md:text-4xl xl:text-5xl">
-        {JSON.parse(locationName).name}
+        {locationName}
       </h1>
       <Dropdown>
         <Dropdown.Toggle className="button-dots">•••</Dropdown.Toggle>
