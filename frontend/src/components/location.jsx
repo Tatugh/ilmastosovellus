@@ -56,7 +56,7 @@ const LocationDisplay = ({ onLocationChange, port }) => {
   const handleSubmit = () => {
     if (selectedLocation) {
       localStorage.setItem("locationData", JSON.stringify(selectedLocation));
-      //console.log(JSON.stringify(selectedLocation));
+      console.log(JSON.stringify(selectedLocation));
       onLocationChange(selectedLocation); // Pass the new location data to parent
     }
   };
