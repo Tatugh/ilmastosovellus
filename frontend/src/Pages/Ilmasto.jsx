@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import LocationDisplay from "../components/Location";
+import LocationDisplay from "../components/LocationSelector";
 import CurrentWeather from "../components/CurrentWeather";
 import HourlyWeather from "../components/HourlyWeather";
 import DailyWeather from "../components/DailyWeather";
