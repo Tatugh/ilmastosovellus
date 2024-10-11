@@ -1,14 +1,19 @@
 # ilmastosovellus
 
-version: 1.14
+version: 1.15
 
 ## 1 JOHDANTO
 
 Projektin tavoitteena on toteuttaa applikaatio, jolla voidaan vertailla säätietoja. Projekti toteutetaan aikavälillä 13.2–21.4 seuraavia työkaluja käyttäen:
+
 • React
+
 • Express
+
 • Javascript
+
 • GitHub
+
 • Chai ja Mocha
 
 ## 2 PROJEKTIN ORGANISAATIO
@@ -16,11 +21,17 @@ Projektin tavoitteena on toteuttaa applikaatio, jolla voidaan vertailla säätie
 Projektin jäseninä ovat Tatu Ruohoaho, Sepeteus Rosenlöf, Janne Toivanen, Heikki Järvelä, Martin Nipuli ja Arttu Nurminoro.
 
 Roolit:
+
 • Tatu Ruohoaho, Kehittäjä
+
 • Sepeteus Rosenlöf, Kehittäjä
+
 • Janne Toivanen, Kehittäjä
+
 • Heikki Järvelä, Kehittäjä
+
 • Arttu Nurminoro, Kehittäjä
+
 • Martin Nipuli, Kehittäjä
 
 Tapaamiset tiistaisin (sprint review sekä uusi sprint planning). Kommunikoimiseen käytetään discordia.
@@ -28,69 +39,121 @@ Tapaamiset tiistaisin (sprint review sekä uusi sprint planning). Kommunikoimise
 ## 3 VAATIMUSMÄÄRITTELY
 
 Toiminnalliset vaatimukset:
+
 • Seurata sää tietoja
+
 • Vertailla sää tietoja sijainnin perusteella
+
 • Nykyiset sääolosuhteet
+
 • Tuntikohtainen ennuste
+
 • Päivittäinen ennuste
+
 • Mahdollisuus lisätä ja poistaa sijainteja.
+
 • Näytä säätiedot eri sijainneille.
+
 • Mahdollisuus vertailla eri sijaintien säätietoja
+
 • Nähdä jos toiminto onnistui taikka jos se ei onnistunut (Käyttäjä EI jää arvailemaan).
 
 Ei-toiminnalliset vaatimukset:
+
 • Arkaluonteista dataa ei tallenneta erikois tarvetta, ja jos tallennetaan, pitää se turvallisesti pitää salassa. Esim. Enkryptaamisella.
+
 • Kerättyä dataa käytetään ainoastaan siihen mihin se on välttämätöntä ja parantaa käyttökokemusta. Esim. Käyttåjän IP-osoitteen kautta löydetyt latitude sekä longitude arvot (haetaan säätiedot näiden perusteella)
+
 • Käyttäjän pitää pystyä helposti näkemään tärkeimmät sekä muut mahdolliset toiminnot (nähdä eri sääsuhteet, ja lokaatioiden lisäily sekä poistaminen helposti ilman erilaista työlästä etsimistä)
+
 • Säätiedot ovat mahdollisimman ajan tasalla, ja tulevaisuuden estimaatiot mahdollisimman täsmällisiä. Näihin vaikuttaa itse API, joten itsenäisesti ei ole mahdollista varmistaa säätietojen tarkkaavuutta.
+
 • Mahdollisimman nopea lataus aika sekä vähiten häiritsevä päivitys eri toiminnoille, kuten säätiedoille kun valitsee uuden lokaation.
+
 • Säätiedot esitetään käyttäjälle mahdollisimman yksinkertaistettuna (most universally understood). Esim. Mitä eri arvot/kuvat/ikonit kuvailevat.
+
 • Koodi olisi mahdollisimman modulaarinen sekä yksinkertainen, jotta sen eri osia olisi helppo ylläpitää ja muuttaa tarpeitten mukaan
 
 Toimintaympäristön rajoitukset:
+
 Tämä applikaatio vaatii hieman ohjelmointi osaamista, jotta pystyy pystyttämään ympäristön ja käyttämään sitä. Tähän vaaditaan seuraavat työkalut tai vastaavat (nämä vaatimukset kestävät niin kauan kuin ei ole itse web-sivustoa):
 
 • Windows 10 (ympäristön toiminta on tälle testattu toimivaksi, muut järjestelmät vaativat erilaisen testauksen)
+
 • Perustietokone (läppäri tai pöytäkone, käyttää hyvin vähän resursseja, vanha parin sadan kone pitäisi toimia hyvin)
+
 • Visual studio code (helposti hallitsemaan ja pystyttämään projekti, teknisesti voisi yhtä hyvin käyttää terminaaleja)
+
 • Javascript (ohjelmointikieli jolla projekti on kehitetty)
+
 • Node.js (ajonaikainen ympäristö javascript koodille)
+
 • Express.js (web-sovelluskehys Node.js:n päälle jolla backend on kehitetty)
+
 • React (JavaScript kirjasto joka auttaa helposti kehittämään tyylikkäitä sekä responsiivisia käyttäjäliittymiä)
+
 • GitHub (Version hallintajärjestelmä)
+
 • Chrome Web Browser taikka Mozilla FireFox (projekti on testattu toimivan näillä selaimilla)
+
 • Internet yhteys (API:t vaativat tämän, jotta pystyy hakemaan dataa)
+
 • Englanninkielen ymmärrys (Webbisivut ovat kirjoitettu englanniksi, joten tämän kielen ymmärtäminen on hyödyllistä, mutta ei kauhean vaadittua)
+
 • Ruutu resoluutio on testattu toimivan 375px, 768px, 1366px, 1920px, 2560px leveille ruuduille
+
 • Osa käytetyistä kirjastoista käyttävät vanhentuneita kirjastoja, mutta applikaatio toimii toistaiseksi.
+
 • API:en antamat tiedot saattavat olla hieman ohitse henkilön oikean lokaatiosta (esim. Henkilö on latitude:61.0 longitude 27.0, mutta data on haettu latitude: 61.7 longitude: 27.3). Myös sää sekä tunti ennusteet saattavat erota todellisista luvuista (Mutta ei paljoa).
-•
+
 Työkaluilla on omat rajoituksensa. JavaScript ei ole C, joten hitaampi, ja ei yhtä yksinkertainen ja siisti (clean) kuin Python (list comprehension, arvoja leikataan suoraan indeksistä ex. [:25], jne.). Git vaikeata korjata brancheja, mutta helppo hajoittaa. React, kehitetty yhden sivun periaatteella. Data mitä voi saada API:lta voi olla väärin ja muuttua koska vaan.
 
 Laatuvaatimukset:
+
 • Toimii
+
 • Sivustolle pääsee selaimen taikka CLI:n kautta
+
 • Säätiedot vastaavat API:lta saatuja säätietoja
+
 • Sivusto on helppokäyttöinen sekä selkeä
+
 • Tietoturva toimii, ei pidetä turhaa arkaluonteista dataa pidempään kuin tarve
+
 • Sivusto ei polta käyttäjän silmiä taikka ruutua
+
 • Sivusto englannin kieleksi
+
 • Vastaa takaisin käyttäjälle mahdollisimman nopeasti
+
 • Toimii eri selaimilla
+
 • Toimii eri ruutu resoluutiolla
+
 • Toimii ainakin Windows käyttöjärjestelmällä
+
 • Mahdollisuus automaatti/manuaali testaukseen
 
 User story:
+
 • Käyttäjänä haluan tietää säätietoja alueeltani
+
 • Haluan katsella hienoja sää graafeja
+
 • Nähdä uusimmat ja ajan tasalla olevat säätiedot
+
 • Katsella muitten maitten/kaupunkien/alueitten säätiedot
+
 • Vertailla eri paikkojen säätietoja
+
 • Nähdä tietoa tärkeätä tietoa säästä, lämpöaste, tuulinopeus, sade, pilvisyys/muu varoitus
+
 • Tuntikohtaiset säätiedot graafina
+
 • Ainakin viikon sää ennusteet
+
 • Lisäillä lokaatioita ja vaihdella niitten välillä helposti
+
 • Poistaa lokaatioita omasta listasta
 
 ## 4 DESIGN
@@ -98,9 +161,13 @@ User story:
 Käyttöliittymä sisältää seuraavat asiat:
 
 • Valitun sijainnin nykyiset sääolosuhteet.
+
 • Tunnittaiset sekä päivittäiset ennusteet näkyvät.
+
 • Käyttäjät voivat vaihdella eri sijaintien välillä.
+
 • Käyttöliittymä toimii eri laitteilla, (työpöytä, mobiili)
+
 • Terminaalin kautta toimii yhteys (ainakin backendiin)
 
 ![alt text](/weatherDefault.png?raw=true "weather default view")
@@ -110,6 +177,7 @@ Sovellus on hyvin yksinkertainen visuaalisest. Näemme tämän hetkisen sään j
 
 ![alt text](/weatherAdd.png?raw=true "weather adding new location")
 Kuva 2. Uuden lokaation lisääminen
+
 Uuden lokaation lisääminen on hyvin yksinkertaista. Kirjoita lokaation nimi, ja sitten paina Search nappia, tämä antaa takaisin listan mahdollisia osuvuuksia etsitylle lokaatiolle. Lokaation valitsemisen jälkeen, kun painetaan OK nappia, jos lokaatio EI ole vielä lisätty tallennettuihin lokaatioihin, se tallennetaan. (Lokaatiot ovat tallennettu local storageen, tällöin ei ole turhaa tarvetta tietokannalle). (Kuva 2.) Jos taas lokaatio on jo tallennettu, niin näemme notifikaation joka kertoo tästä.
 
 ![alt text](/weatherSwitch.png?raw=true "weather location quick switch")
@@ -153,18 +221,24 @@ Käytämme myös cache:iä, joka tallentaa toistaiseksi eri säätiedot 15 minuu
 ## 5 TESTAUS
 
 Testaus strategia:
+
 • Automaatti sekä manuaaliset testit
+
 • Testit samaan aikaan kuin funktiot/metodit tehdään
+
 • Testit ensijaisesti kritikaali toimivuuksille
+
 • Mahdollisimman modulaariset testit Test cases:
+
 • Sivustoon yhteys
+
 • Toimii (toivottavasti)
 
 Automaatti testit (vain backendille) testasivat, että API lähettää oikean datan takaisin odotetulla tavalla. Helpottaa tulevaisuudessa debuggaamaan mahdolliset ongelmat. Käytimme Chai + Mocha kombinaatiota testejen tekemiseen.
 
 Testit ovat yksinkertaista juoksuttaa seuraavalla komennolla backendissä:
 
-npm run test tests
+```npm run test tests```
 
 Manuaalisilla testeillä testasimme frontendin toimintaa; UI:n visuaalinen näkymä käyttäjälle sekä sen toimivuus eri näyttö kokoilla, näkyykö oikeat sää ikonit, data (condition, wind speed, etc.), 7 päivän säätiedot, 24 h lämpötila sekä sademäärä, paikan valitseminen ja sen myötä uusien säätietojen saaminen ja näkyminen sivulla.
 
@@ -211,6 +285,10 @@ Aikajana ja milestonet:
 - Koodi seuraa jotain standardia (funktio/metodi, muuttujat, etc. Nimetään samalla tavalla)
 - Javascript ei typescript
 
+# Nopea Käyttöönotto
+
+frontend ja backend kansioissa terminaalissa tee`npm i` ja sitten `npm run dev`
+
 # Hyödylliset komennot ja tietoa
 
 Kun haluaa käyttää sekä frontend että backend samanaikaisesti, pitää `npm run dev` frontend sekä backend kansioissa.
@@ -227,7 +305,8 @@ Powershell komento:
 
 • Get request joka hakee lokaation säätiedot
 
-```$url = "http://localhost:3001/api/weather?name=Mikkeli&longitude=27.27227&latitude=61.68857&weatherType=Current"
+```
+$url = "http://localhost:3001/api/weather?name=Mikkeli&longitude=27.27227&latitude=61.68857&weatherType=Current"
 $response = Invoke-WebRequest -Uri $url -Method GET
 $data = $response.Content
 Write-Host $data
@@ -235,6 +314,7 @@ Write-Host $data
 
 • Post request joka hakee lokaation tiedot
 
-```$url = "http://localhost:3001/api/location/data?q=Mikkeli"
+```
+$url = "http://localhost:3001/api/location/data?q=Mikkeli"
 Invoke-WebRequest -Uri $url -Method Post
 ```
