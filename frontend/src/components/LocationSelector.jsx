@@ -1,36 +1,46 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import Dropdown from "react-bootstrap/Dropdown";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Dropdown from "react-bootstrap/Dropdown";
+import Notification from "./Notification";
 
 const LocationDisplay = ({ onLocationChange, port }) => {
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState("");
   const [locations, setLocations] = useState([]);
-  const [selectedLocation, setLocation] = useState(undefined);
-  const [locationName, setLocationName] = useState(
-    JSON.parse(localStorage.getItem("locationData")).name
+  const [selectedLocation, setSelectedLocation] = useState(undefined);
+  const [savedLocations, setSavedLocations] = useState([]);
+  const [currentLocation, setCurrentLocation] = useState(
+    JSON.parse(localStorage.getItem("locationData")) || {
+      name: "Mikkeli",
+    }
   );
-  const handleClose = () => setShow(false);
+
+  const [notification, setNotification] = useState(null);
+
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("savedLocations")) || [];
+    setSavedLocations(saved);
+  }, []);
+
+  const handleClose = () => {
+    setShow(false);
+    setNotification(null);
+  };
   const handleShow = () => setShow(true);
 
-  // Constructs new 'locData' array which contains 5 locations as objects from fetched data
-  // Then sets the data as valid JSON string to localStrorage with key of 'locationData'
-  // When you get 'locationData' from localStorage you have to parse the JSON string data with builtin function
-  // 'JSON.parse()'. This returns a valid JSON object which then can be used for later purposes
   const locationDataCleaner = (data) => {
-    //clean up data to get rid of unnecessary info and add expiration
-    const locData = data.results.map((location) => {
-      return {
+    if (data) {
+      const locData = data.results.map((location) => ({
         name: location.name,
         longitude: location.longitude,
         latitude: location.latitude,
         expiration: Date.now() + 1000 * 60 * 60, // 1 hour in milliseconds
-      };
-    });
-    setLocations(locData);
+      }));
+      setLocations(locData);
+    }
   };
 
   const handleChange = (e) => {
@@ -39,37 +49,72 @@ const LocationDisplay = ({ onLocationChange, port }) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-
-    fetch(`http://localhost:${port}/api/location/data?q=${query}`, {
-      method: "POST",
-    })
-      .then((res) => {
-        return res.json();
+    if (query) {
+      fetch(`http://localhost:${port}/api/location/data?q=${query}`, {
+        method: "POST",
       })
-      .then((locData) => {
-        locationDataCleaner(locData);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  //save selected location to localStorage, empty out locations and reload page to see changes
-  const handleSubmit = () => {
-    if (selectedLocation) {
-      localStorage.setItem("locationData", JSON.stringify(selectedLocation));
-      // console.log(JSON.stringify(selectedLocation));
-      onLocationChange(selectedLocation); // Pass the new location data to parent
-      handleClose();
-      setQuery("");
-      setLocations([]);
-      setLocationName(selectedLocation.name);
+        .then((res) => res.json())
+        .then(locationDataCleaner)
+        .catch(console.error);
     }
   };
 
-  if (!localStorage.getItem("locationData")) {
-    localStorage.setItem("locationData", JSON.stringify({ name: "Mikkeli" }));
-  }
+  const isLocationAlreadySaved = (location) => {
+    return savedLocations.some(
+      (savedLoc) =>
+        savedLoc.latitude === location.latitude &&
+        savedLoc.longitude === location.longitude
+    );
+  };
+
+  const handleSubmit = () => {
+    if (selectedLocation) {
+      if (!isLocationAlreadySaved(selectedLocation)) {
+        const updatedSavedLocations = [...savedLocations, selectedLocation];
+        localStorage.setItem(
+          "savedLocations",
+          JSON.stringify(updatedSavedLocations)
+        );
+        setSavedLocations(updatedSavedLocations);
+        handleClose();
+        setCurrentLocation(selectedLocation);
+        localStorage.setItem("locationData", JSON.stringify(selectedLocation));
+        onLocationChange(selectedLocation);
+        setQuery("");
+        setLocations([]);
+        setSelectedLocation("");
+      }
+
+      setNotification({
+        type: "warning",
+        message: "The currently selected location is already saved.",
+      });
+
+      setTimeout(() => setNotification(null), 3000);
+    }
+  };
+
+  const switchLocation = (location) => {
+    setCurrentLocation(location);
+    localStorage.setItem("locationData", JSON.stringify(location));
+    onLocationChange(location);
+  };
+
+  const deleteLocation = (locationToDelete) => {
+    const updatedLocations = savedLocations.filter(
+      (loc) => loc.name !== locationToDelete.name
+    );
+    setSavedLocations(updatedLocations);
+    localStorage.setItem("savedLocations", JSON.stringify(updatedLocations));
+    if (currentLocation.name === locationToDelete.name) {
+      const newCurrentLocation = updatedLocations[0] || {
+        name: "Mikkeli",
+      };
+      setCurrentLocation(newCurrentLocation);
+      localStorage.setItem("locationData", JSON.stringify(newCurrentLocation));
+      onLocationChange(newCurrentLocation);
+    }
+  };
 
   return (
     <div className="location-container">
@@ -79,7 +124,11 @@ const LocationDisplay = ({ onLocationChange, port }) => {
           <Modal.Title className="modal-title">Add a location</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleClose}>
+          <Notification
+            notification={notification}
+            onClose={() => setNotification(null)}
+          />
+          <Form onSubmit={handleSearch}>
             <Form.Control
               size="lg"
               type="text"
@@ -87,11 +136,7 @@ const LocationDisplay = ({ onLocationChange, port }) => {
               onChange={handleChange}
             />
             <Modal.Footer>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={handleSearch}
-              >
+              <button type="submit" className="btn btn-primary">
                 Search
               </button>
               <button
@@ -107,38 +152,51 @@ const LocationDisplay = ({ onLocationChange, port }) => {
             <div className="locations-list">
               <h2>Locations</h2>
               {locations.map((location, index) => (
-                <ul key={index}>
+                <div key={index}>
                   <input
                     type="radio"
                     id={`location-${index}`}
                     name="selectedLocation"
-                    value={location}
-                    onChange={(e) => setLocation(location)}
+                    checked={selectedLocation === location}
+                    onChange={() => setSelectedLocation(location)}
                   />
-                  <label for={`location-${index}`}>
+                  <label htmlFor={`location-${index}`}>
                     {location.name} - Longitude: {location.longitude} Latitude:{" "}
                     {location.latitude}
                   </label>
-                </ul>
+                </div>
               ))}
             </div>
           )}
         </Modal.Body>
       </Modal>
 
+      {/* <div className="current-location"> */}
       <h1 className="current-location text-3xl md:text-4xl xl:text-5xl">
-        {locationName}
+        {currentLocation.name}
       </h1>
       <Dropdown>
         <Dropdown.Toggle className="button-dots">•••</Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item href="#action-1">
-            Set as default location
-          </Dropdown.Item>
-          <Dropdown.Item href="#action-2">Delete location</Dropdown.Item>
+          {savedLocations.length === 0 && <p> Added Locations Quick Switch </p>}
+          {savedLocations.map((location, index) => (
+            <Dropdown.Item key={index} onClick={() => switchLocation(location)}>
+              {location.name}
+            </Dropdown.Item>
+          ))}
+          <Dropdown.Divider />
+          {savedLocations.map((location, index) => (
+            <Dropdown.Item
+              key={`delete-${index}`}
+              onClick={() => deleteLocation(location)}
+            >
+              Delete {location.name}
+            </Dropdown.Item>
+          ))}
         </Dropdown.Menu>
       </Dropdown>
     </div>
+    // </div>
   );
 };
 

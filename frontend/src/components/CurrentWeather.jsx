@@ -31,7 +31,6 @@ function CurrentWeather({ locationData, port }) {
         const curWeather = await response.json(); //get current weather from JSON
         setWeather(curWeather.current);
         setWeatherCondition(curWeather.current.weather_condition);
-        console.log(curWeather.current.weather_code);
       } catch (error) {
         console.error("Error fetching current weather:", error);
       }
@@ -39,11 +38,11 @@ function CurrentWeather({ locationData, port }) {
     fetchCurrentWeather();
     //fetch data every 15 minutes to limit API calls and to keep user up-to-date on their current weather
     const INTERVAL = 15 * 60000; // 15 minutes in milliseconds
-    const priceUpdateInterval = setInterval(fetchCurrentWeather, INTERVAL);
+    const weatherUpdateInterval = setInterval(fetchCurrentWeather, INTERVAL);
     return () => {
-      clearInterval(priceUpdateInterval); // Clean up the interval when the component unmounts
+      clearInterval(weatherUpdateInterval); // Clean up the interval when the component unmounts
     };
-  }, [locationData]); // Empty dependency array ensures this runs only once
+  }, [locationData]); // locationData ensures proper updating on data changes
 
   if (weather)
     return (
@@ -64,7 +63,7 @@ function CurrentWeather({ locationData, port }) {
         </div>
       </>
     );
-  else return <div>Ei sää tietoa</div>;
+  else return <div>No weather data!</div>;
 }
 
 export default CurrentWeather;

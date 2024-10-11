@@ -10,6 +10,8 @@ const Ilmasto = () => {
       const storedData = localStorage.getItem("locationData");
       if (storedData) {
         return JSON.parse(storedData);
+      } else {
+        return "";
       }
     } catch (error) {
       console.error("Error parsing location data:", error);

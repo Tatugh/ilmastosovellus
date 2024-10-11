@@ -43,7 +43,13 @@ const DailyWeather = ({ locationData, port }) => {
       }
     };
     check();
-  }, [locationData]);
+    //fetch data every 15 minutes to limit API calls and to keep user up-to-date on their current weather
+    const INTERVAL = 60 * 60000; // 60 minutes in milliseconds
+    const weatherUpdateInterval = setInterval(check, INTERVAL);
+    return () => {
+      clearInterval(weatherUpdateInterval); // Clean up the interval when the component unmounts
+    };
+  }, [locationData]); // locationData ensures proper updating on data changes
 
   return (
     <div className="weatherTable-container">

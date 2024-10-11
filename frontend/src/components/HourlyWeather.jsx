@@ -34,7 +34,6 @@ function HourlyWeather({ locationData, port }) {
         setTemperatures(curWeather.hourly.temperature_2m);
         setRain(curWeather.hourly.precipitation);
         setWindSpeed(curWeather.hourly.wind_speed_10m);
-        console.log(curWeather);
       } catch (error) {
         console.error("Error fetching hourly weather:", error);
       }

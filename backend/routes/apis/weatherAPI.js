@@ -2,7 +2,7 @@ import { fetchUserLatLong } from "./userAPI.js";
 
 const BASE_WEATHER_URL = "https://api.open-meteo.com/v1/forecast?";
 const HARDCODED_WEATHER_QUERY =
-  "https://geocoding-api.open-meteo.com/v1/search?name=Mikkeli&current=temperature_2m";
+  "https://api.open-meteo.com/v1/forecast?latitude=61.6886&longitude=27.2723&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,rain,weather_code,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,precipitation,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max&timezone=Europe%2FMoscow";
 const userLocData = await fetchUserLatLong();
 const BASE_LOCATION_URL = "https://geocoding-api.open-meteo.com/v1/search?";
 
@@ -141,11 +141,8 @@ export async function fetchCurrentWeatherData(query) {
         "temperature_2m",
         "relative_humidity_2m",
         "apparent_temperature",
-        "sunshine_duration",
         "precipitation",
         "rain",
-        "showers",
-        "snowfall",
         "wind_speed_10m",
         "weather_code",
       ],
@@ -158,11 +155,8 @@ export async function fetchCurrentWeatherData(query) {
           "temperature_2m",
           "relative_humidity_2m",
           "apparent_temperature",
-          "sunshine_duration",
           "precipitation",
           "rain",
-          "showers",
-          "snowfall",
           "wind_speed_10m",
           "weather_code",
         ],
@@ -234,11 +228,6 @@ export async function fetchDailyWeatherData(query) {
       daily: [
         "temperature_2m_max",
         "temperature_2m_min",
-        "sunrise",
-        "sunset",
-        "daylight_duration",
-        "sunshine_duration",
-        "uv_index_max",
         "precipitation_probability_max",
         "wind_speed_10m_max",
         "weather_code",

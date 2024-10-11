@@ -10,15 +10,13 @@ describe("Fetching weather data and checking responses", () => {
     Latitude: 61.6886,
   };
   // fetch current data and check that response matches expected values
-  it("should fetch latest temp, humidity, precipitation, rain, showers, snowfall and wind speed", async () => {
+  it("should fetch latest temp, humidity, precipitation, rain and wind speed", async () => {
     const weatherData = await weatherAPI.fetchCurrentWeatherData(LocationQuery);
     expect(weatherData.current.temperature_2m).to.exist;
     expect(weatherData.current.relative_humidity_2m).to.exist;
     expect(weatherData.current.apparent_temperature).to.exist;
     expect(weatherData.current.precipitation).to.exist;
     expect(weatherData.current.rain).to.exist;
-    expect(weatherData.current.showers).to.exist;
-    expect(weatherData.current.snowfall).to.exist;
     expect(weatherData.current.wind_speed_10m).to.exist;
     expect(weatherData.current.weather_code).to.exist;
   });
@@ -37,11 +35,6 @@ describe("Fetching weather data and checking responses", () => {
     const weatherData = await weatherAPI.fetchDailyWeatherData(LocationQuery);
     expect(weatherData.daily.temperature_2m_max).to.exist;
     expect(weatherData.daily.temperature_2m_min).to.exist;
-    expect(weatherData.daily.sunrise).to.exist;
-    expect(weatherData.daily.sunset).to.exist;
-    expect(weatherData.daily.daylight_duration).to.exist;
-    expect(weatherData.daily.sunshine_duration).to.exist;
-    expect(weatherData.daily.uv_index_max).to.exist;
     expect(weatherData.daily.precipitation_probability_max).to.exist;
     expect(weatherData.daily.wind_speed_10m_max).to.exist;
     expect(weatherData.daily.weather_code).to.exist;
