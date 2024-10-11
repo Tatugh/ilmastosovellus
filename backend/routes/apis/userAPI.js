@@ -4,7 +4,6 @@ const USER_LOCATION =
 //useful for fetching accurate weather data based on user's current geolocation
 const fetchUserLatLong = async () => {
   try {
-    //return {latitude: null, longitude: null}; //temporary testing purposes
     const response = await fetch(USER_LOCATION);
     const contentType = response.headers.get("content-type");
     if (!contentType) {
@@ -14,7 +13,6 @@ const fetchUserLatLong = async () => {
     const latitude = jsonData["location"].latitude;
     const longitude = jsonData["location"].longitude;
 
-    //console.log(longitude, latitude);
     return { latitude: latitude, longitude: longitude };
   } catch (error) {
     console.error("Error:", error);

@@ -18,11 +18,11 @@ function CurrentWeather({ locationData, port }) {
           locationData.latitude !== undefined
         ) {
           response = await fetch(
-            `http://localhost:${port}/api/weather/current?name=${locationData.name}&longitude=${locationData.longitude}&latitude=${locationData.latitude}`
+            `http://localhost:${port}/api/weather?name=${locationData.name}&longitude=${locationData.longitude}&latitude=${locationData.latitude}&weatherType=Current`
           );
         } else {
           response = await fetch(
-            `http://localhost:${port}/api/weather/current?name=""`
+            `http://localhost:${port}/api/weather?name=""&weatherType=Current`
           );
         }
         if (!response.ok) {

@@ -24,11 +24,11 @@ const DailyWeather = ({ locationData, port }) => {
           locationData.latitude !== undefined
         ) {
           response = await axios.get(
-            `http://localhost:${port}/api/weather/daily?name=${locationData.name}&longitude=${locationData.longitude}&latitude=${locationData.latitude}`
+            `http://localhost:${port}/api/weather?name=${locationData.name}&longitude=${locationData.longitude}&latitude=${locationData.latitude}&weatherType=Daily`
           );
         } else {
           response = await axios.get(
-            `http://localhost:${port}/api/weather/daily?name=""`
+            `http://localhost:${port}/api/weather?name=""&weatherType=Daily`
           );
         }
         const responseResult = await response.data.daily;
